@@ -1,0 +1,11 @@
+{
+	"required": true,
+	"package": "com.namith.surfacesurvival.mixin",
+	"compatibilityLevel": "JAVA_21",
+	"mixins": [
+		"AbstractBlockStateMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}
