@@ -3,7 +3,8 @@
 	"package": "com.namith.surfacesurvival.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
-		"AbstractBlockStateMixin"
+		"AbstractBlockStateMixin",
+		"FleeingAnimalsMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
