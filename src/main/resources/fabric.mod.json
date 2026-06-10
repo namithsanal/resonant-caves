@@ -1,0 +1,25 @@
+{
+	"schemaVersion": 1,
+	"id": "surfacesurvival",
+	"version": "${version}",
+	"name": "Surface Survival",
+	"description": "A survival overhaul where mining is impossible. Stone and deepslate are unbreakable, the surface sits near build height, huge caves become traversal space, animals roam in large skittish herds, and energy comes from naturally occurring Resonant Ore.",
+	"authors": [
+		"Namith"
+	],
+	"contact": {},
+	"license": "MIT",
+	"icon": "assets/surfacesurvival/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"com.namith.surfacesurvival.SurfaceSurvival"
+		]
+	},
+	"depends": {
+		"fabricloader": ">=0.19.3",
+		"minecraft": "~1.21.1",
+		"java": ">=21",
+		"fabric-api": "*"
+	}
+}
