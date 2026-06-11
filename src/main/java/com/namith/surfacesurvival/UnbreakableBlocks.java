@@ -1,5 +1,6 @@
 package com.namith.surfacesurvival;
 
+import com.namith.surfacesurvival.block.ModBlocks;
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -23,9 +24,14 @@ public final class UnbreakableBlocks {
 	private UnbreakableBlocks() {
 	}
 
-	/** The "host rock" that cannot be mined: stone and deepslate only. */
+	/**
+	 * The "host rock" that cannot be mined: stone and deepslate, plus Resonant Ore (Feature 3),
+	 * which is already bedrock-hard via its block settings — listed here too so this predicate
+	 * remains the single source of truth for "unbreakable" blocks.
+	 */
 	public static boolean isUnbreakable(BlockState state) {
-		return state.isOf(Blocks.STONE) || state.isOf(Blocks.DEEPSLATE);
+		return state.isOf(Blocks.STONE) || state.isOf(Blocks.DEEPSLATE)
+				|| state.isOf(ModBlocks.RESONANT_ORE) || state.isOf(ModBlocks.DEEPSLATE_RESONANT_ORE);
 	}
 
 	public static void register() {
