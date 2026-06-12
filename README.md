@@ -1,6 +1,6 @@
 # Resonant Caves
 
-A Fabric mod for Minecraft **1.21.1** that overhauls survival around one core idea: **mining is impossible**. Stone and deepslate are unbreakable, so the game shifts from digging to exploration, hunting, and infrastructure. It is recommended that [Item Obliterator](https://www.curseforge.com/minecraft/mc-mods/item-obliterator) is used to remove all other sources of power.
+A Fabric mod for Minecraft **1.21.1** that overhauls survival around one core idea: **mining is impossible**. Stone and deepslate are unbreakable, so the game shifts from digging to exploration, hunting, and infrastructure. It is recommended that [Item Obliterator](https://github.com/nvb-uy/Item_Obliterator) is used to remove all other sources of power. I also recommend [Tech Reborn](https://github.com/TechReborn/TechReborn), and [K-Turrets](https://github.com/AlexiyOrlov/k-turrets)
 
 ## Features
 
