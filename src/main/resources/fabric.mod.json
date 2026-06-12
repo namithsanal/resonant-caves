@@ -1,23 +1,23 @@
 {
 	"schemaVersion": 1,
-	"id": "surfacesurvival",
+	"id": "resonantcaves",
 	"version": "${version}",
-	"name": "Surface Survival",
+	"name": "Resonant Caves",
 	"description": "A survival overhaul where mining is impossible. Stone and deepslate are unbreakable, the surface sits near build height, huge caves become traversal space, animals roam in large skittish herds, and energy comes from naturally occurring Resonant Ore.",
 	"authors": [
 		"Namith"
 	],
 	"contact": {},
 	"license": "MIT",
-	"icon": "assets/surfacesurvival/icon.png",
+	"icon": "assets/resonantcaves/icon.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"com.namith.surfacesurvival.SurfaceSurvival"
+			"com.namith.resonantcaves.ResonantCaves"
 		]
 	},
 	"mixins": [
-		"surfacesurvival.mixins.json"
+		"resonantcaves.mixins.json"
 	],
 	"depends": {
 		"fabricloader": ">=0.19.3",

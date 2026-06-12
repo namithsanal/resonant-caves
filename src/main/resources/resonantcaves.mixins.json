@@ -1,0 +1,13 @@
+{
+	"required": true,
+	"package": "com.namith.resonantcaves.mixin",
+	"compatibilityLevel": "JAVA_21",
+	"mixins": [
+		"AbstractBlockStateMixin",
+		"CreeperTargetingMixin",
+		"FleeingAnimalsMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}
