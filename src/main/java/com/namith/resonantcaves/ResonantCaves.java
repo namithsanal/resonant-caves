@@ -2,6 +2,7 @@ package com.namith.resonantcaves;
 
 import com.namith.resonantcaves.block.ModBlocks;
 import com.namith.resonantcaves.block.entity.ModBlockEntities;
+import com.namith.resonantcaves.item.ModItems;
 import net.fabricmc.api.ModInitializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,5 +30,9 @@ public class ResonantCaves implements ModInitializer {
 		EnergyStorage.SIDED.registerForBlockEntity(
 				(blockEntity, direction) -> blockEntity.getEnergyStorage(),
 				ModBlockEntities.RESONANT_ORE);
+
+		// Feature 7: Resonant Helmet — gold-tier armor with a Night Vision + hostile-mob radar effect.
+		ModItems.register();
+		NightVisionRefresher.register();
 	}
 }
