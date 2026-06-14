@@ -12,13 +12,12 @@ import net.minecraft.util.Identifier;
 import net.minecraft.world.biome.SpawnSettings;
 
 /**
- * Feature 2 — Large fleeing herds (and Feature 6 — creeper packs).
+ * Feature 2 — Large fleeing herds.
  *
  * <p>Raises the natural spawn group sizes for sheep, cows, pigs, chickens, and horses, turning
  * their existing biome spawns into large herds. The actual "flee from players" behavior for
  * sheep/cows/pigs/chickens is added by {@code FleeingAnimalsMixin}; horses are exempt and remain
- * tame to approach despite spawning in large groups. The same group-size rewrite is reused for
- * creepers, which spawn in packs of 10-15 instead of alone.
+ * tame to approach despite spawning in large groups.
  */
 public final class HerdSpawning {
 	private HerdSpawning() {
@@ -30,7 +29,6 @@ public final class HerdSpawning {
 		growHerd("pig_herds", EntityType.PIG, 8, 16);
 		growHerd("chicken_herds", EntityType.CHICKEN, 20, 40);
 		growHerd("horse_herds", EntityType.HORSE, 6, 12);
-		growHerd("creeper_packs", EntityType.CREEPER, 10, 15);
 	}
 
 	/**

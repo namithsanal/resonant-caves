@@ -23,6 +23,9 @@ public class ResonantCaves implements ModInitializer {
 		// Feature 2: large herds of sheep, cows, pigs, chickens, and horses.
 		HerdSpawning.register();
 
+		// Feature 6: creeper pack spawning.
+		CreeperPackSpawning.register();
+
 		// Feature 3: Resonant Ore — naturally-occurring unbreakable RF source.
 		ModBlocks.register();
 		ModBlockEntities.register();

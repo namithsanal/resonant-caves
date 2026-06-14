@@ -13,11 +13,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 /**
  * Feature 5 — injects {@link SeekAndDetonateGoal} into every creeper's goal selector so it
  * pathfinds toward and detonates near blocks tagged {@code resonantcaves:creeper_attracting_blocks}.
- *
- * <p>Also raises the per-spawn-attempt creeper cap (Feature 6): {@link net.minecraft.entity.mob.MobEntity#getLimitPerChunk()}
- * defaults to 4 and is unrelated to {@code SpawnSettings.SpawnEntry}'s min/max group size — without this
- * override, {@code SpawnHelper.spawnEntitiesInChunk} stops after 4 creepers regardless of the 10-15
- * group size configured in {@code HerdSpawning}, so packs never exceeded vanilla's usual size.
  */
 @Mixin(CreeperEntity.class)
 public abstract class CreeperTargetingMixin extends HostileEntity {
@@ -28,10 +23,5 @@ public abstract class CreeperTargetingMixin extends HostileEntity {
 	@Inject(method = "initGoals", at = @At("TAIL"))
 	private void resonantcaves$addSeekAndDetonateGoal(CallbackInfo ci) {
 		this.goalSelector.add(4, new SeekAndDetonateGoal((CreeperEntity) (Object) this, 1.0));
-	}
-
-	@Override
-	public int getLimitPerChunk() {
-		return 15;
 	}
 }
