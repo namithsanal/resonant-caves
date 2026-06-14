@@ -15,15 +15,15 @@ import net.minecraft.util.math.random.Random;
  * the creeper group size there produced few, widely-scattered extra creepers and no visible packs.
  *
  * <p>Instead, every naturally-spawned creeper becomes the "leader" of a tight pack: on
- * {@code ServerEntityEvents.ENTITY_LOAD}, 9-14 more creepers are spawned within {@link #SPREAD}
+ * {@code ServerEntityEvents.ENTITY_LOAD}, 4-9 more creepers are spawned within {@link #SPREAD}
  * blocks of it, each placed only where {@code World.isSpaceEmpty} confirms there's room. All pack
  * members (including the leader) are tagged with {@link #PACK_TAG} so chunk reloads of existing
  * creepers don't repeatedly spawn new packs around them.
  */
 public final class CreeperPackSpawning {
 	private static final String PACK_TAG = "resonantcaves_creeper_pack";
-	private static final int MIN_PACK_SIZE = 10;
-	private static final int MAX_PACK_SIZE = 15;
+	private static final int MIN_PACK_SIZE = 5;
+	private static final int MAX_PACK_SIZE = 10;
 	private static final double SPREAD = 3.0;
 	private static final int PLACEMENT_ATTEMPTS = 6;
 
