@@ -11,6 +11,7 @@ A Fabric mod for Minecraft **1.21.1** that overhauls survival around one core id
 5. **Creeper tech-mod targeting** — Creepers sense and beeline toward blocks tagged `resonantcaves:creeper_attracting_blocks` (pre-populated with ~40 Tech Reborn energy-infrastructure blocks: cables, transformers, storage units, generators, solar panels). On arrival, the creeper detonates normally — a standing threat to your power infrastructure that rewards defensive placement. The tag is extensible to other tech mods via a small datapack.
 6. **Creeper packs** — Creepers spawn in packs of 5-10, alongside the large herds of passive animals.
 7. **Resonant Helmet** — A gold-tier helmet that grants permanent, dimmed Night Vision and a through-walls radar showing every hostile mob within 128 blocks as a faintly breathing orb. Not craftable: zombies have a small chance to spawn wearing one, and always drop it when killed.
+8. **Living Tree** — Place any vanilla log on grass and feed it RF with a cable, and it grows into a tree of its own species, shrinking and dropping logs normally if the power isn't sustained. Natural trees are now as rare as oak trees in a plains biome, and leaves no longer drop saplings — growing your own is the only renewable source of wood.
 
 ## Requirements
 
