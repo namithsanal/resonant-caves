@@ -10,7 +10,7 @@ import java.util.Collection;
 import java.util.stream.Collectors;
 
 /**
- * The Resonant Helmet's Night Vision is applied with showIcon=false so the top-right HUD
+ * The Resonant Crown's Night Vision is applied with showIcon=false so the top-right HUD
  * (InGameHud) hides it, but AbstractInventoryScreen.drawStatusEffects ignores shouldShowIcon
  * and draws every active effect. Filter those out here too, for consistency with the HUD.
  */

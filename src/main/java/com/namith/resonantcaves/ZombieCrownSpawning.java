@@ -8,16 +8,16 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.random.Random;
 
 /**
- * Feature 7 follow-up — the Resonant Helmet is no longer craftable; instead, plain zombies have a
+ * Feature 7 follow-up — the Resonant Crown is no longer craftable; instead, plain zombies have a
  * small chance to spawn already wearing one. The equipment drop chance is set above 1.0, mirroring
  * vanilla's pillager-captain banner ({@code PatrolEntity}), which makes {@code MobEntity.dropEquipment}
  * drop it unconditionally on death regardless of what killed the zombie.
  */
-public final class ZombieHelmetSpawning {
-	private static final String ROLLED_TAG = "resonantcaves_zombie_helmet_roll";
+public final class ZombieCrownSpawning {
+	private static final String ROLLED_TAG = "resonantcaves_zombie_crown_roll";
 	private static final float SPAWN_CHANCE = 0.05F;
 
-	private ZombieHelmetSpawning() {
+	private ZombieCrownSpawning() {
 	}
 
 	public static void register() {
@@ -29,7 +29,7 @@ public final class ZombieHelmetSpawning {
 
 			Random random = world.getRandom();
 			if (random.nextFloat() < SPAWN_CHANCE) {
-				zombie.equipStack(EquipmentSlot.HEAD, new ItemStack(ModItems.RESONANT_HELMET));
+				zombie.equipStack(EquipmentSlot.HEAD, new ItemStack(ModItems.RESONANT_CROWN));
 				zombie.setEquipmentDropChance(EquipmentSlot.HEAD, 2.0F);
 			}
 		});

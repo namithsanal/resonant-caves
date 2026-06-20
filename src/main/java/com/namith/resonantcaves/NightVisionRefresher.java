@@ -11,7 +11,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
-/** Feature 7 (part 2) — re-applies low-amplitude Night Vision to Resonant Helmet wearers so it never flickers off. */
+/** Feature 7 (part 2) — re-applies low-amplitude Night Vision to Resonant Crown wearers so it never flickers off. */
 public final class NightVisionRefresher {
 	private NightVisionRefresher() {
 	}
@@ -22,7 +22,7 @@ public final class NightVisionRefresher {
 	// remaining duration (EFFECT_DURATION_TICKS - REFRESH_INTERVAL_TICKS) comfortably above that.
 	private static final int EFFECT_DURATION_TICKS = 320;
 
-	// Players currently known to be wearing the helmet, so equip/unequip can be applied the instant
+	// Players currently known to be wearing the crown, so equip/unequip can be applied the instant
 	// it happens rather than waiting for the next REFRESH_INTERVAL_TICKS tick.
 	private static final Set<UUID> WEARING = new HashSet<>();
 
@@ -30,7 +30,7 @@ public final class NightVisionRefresher {
 		ServerTickEvents.END_SERVER_TICK.register(server -> {
 			boolean refresh = server.getTicks() % REFRESH_INTERVAL_TICKS == 0;
 			for (ServerPlayerEntity player : server.getPlayerManager().getPlayerList()) {
-				boolean wearing = player.getEquippedStack(EquipmentSlot.HEAD).isOf(ModItems.RESONANT_HELMET);
+				boolean wearing = player.getEquippedStack(EquipmentSlot.HEAD).isOf(ModItems.RESONANT_CROWN);
 				boolean wasWearing = WEARING.contains(player.getUuid());
 				if (wearing && (!wasWearing || refresh)) {
 					player.addStatusEffect(new StatusEffectInstance(

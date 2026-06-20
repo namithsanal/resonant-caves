@@ -34,10 +34,10 @@ public class ResonantCaves implements ModInitializer {
 				(blockEntity, direction) -> blockEntity.getEnergyStorage(),
 				ModBlockEntities.RESONANT_ORE);
 
-		// Feature 7: Resonant Helmet — gold-tier armor with a Night Vision + hostile-mob radar effect.
+		// Feature 7: Resonant Crown — gold-tier armor with a Night Vision + hostile-mob radar effect.
 		// Not craftable; zombies sometimes spawn wearing one and always drop it on death.
 		ModItems.register();
 		NightVisionRefresher.register();
-		ZombieHelmetSpawning.register();
+		ZombieCrownSpawning.register();
 	}
 }

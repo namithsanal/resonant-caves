@@ -19,7 +19,7 @@ import java.util.EnumMap;
 import java.util.List;
 
 /**
- * Feature 7 — Resonant Helmet: a custom armor material matching vanilla GOLD's
+ * Feature 7 — Resonant Crown: a custom armor material matching vanilla GOLD's
  * defense/toughness/knockback-resistance/enchantability/equip-sound, but with IRON's
  * durability multiplier (165 = base 11 * 15).
  */
@@ -35,13 +35,13 @@ public final class ModItems {
 					25, // enchantability — matches GOLD
 					SoundEvents.ITEM_ARMOR_EQUIP_GOLD,
 					() -> Ingredient.ofItems(Items.GOLD_INGOT),
-					List.of(new ArmorMaterial.Layer(Identifier.of(ResonantCaves.MOD_ID, "resonant_helmet"))),
+					List.of(new ArmorMaterial.Layer(Identifier.of(ResonantCaves.MOD_ID, "resonant_crown"))),
 					0.0F, // toughness — matches GOLD
 					0.0F  // knockback resistance — matches GOLD
 			));
 
-	public static final Item RESONANT_HELMET = Registry.register(Registries.ITEM,
-			Identifier.of(ResonantCaves.MOD_ID, "resonant_helmet"),
+	public static final Item RESONANT_CROWN = Registry.register(Registries.ITEM,
+			Identifier.of(ResonantCaves.MOD_ID, "resonant_crown"),
 			new ArmorItem(RESONANT, ArmorItem.Type.HELMET,
 					new Item.Settings().maxDamage(ArmorItem.Type.HELMET.getMaxDamage(15))));
 
@@ -58,6 +58,6 @@ public final class ModItems {
 
 	public static void register() {
 		ItemGroupEvents.modifyEntriesEvent(RegistryKey.of(RegistryKeys.ITEM_GROUP, Identifier.of("minecraft", "combat")))
-				.register(entries -> entries.add(RESONANT_HELMET));
+				.register(entries -> entries.add(RESONANT_CROWN));
 	}
 }

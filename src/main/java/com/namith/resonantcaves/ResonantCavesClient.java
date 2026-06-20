@@ -26,7 +26,7 @@ import org.joml.Vector3f;
 import java.util.List;
 import java.util.Random;
 
-/** Client entrypoint. Hosts the Resonant Helmet's "hostile mob radar" rendering (Feature 7). */
+/** Client entrypoint. Hosts the Resonant Crown's "hostile mob radar" rendering (Feature 7). */
 public class ResonantCavesClient implements ClientModInitializer {
 	private static final double RADIUS = 128.0;
 	// Half-width of the orb quad as a fraction of distance to the camera, so its on-screen size
@@ -57,7 +57,7 @@ public class ResonantCavesClient implements ClientModInitializer {
 		if (player == null || world == null) {
 			return;
 		}
-		if (!player.getEquippedStack(EquipmentSlot.HEAD).isOf(ModItems.RESONANT_HELMET)) {
+		if (!player.getEquippedStack(EquipmentSlot.HEAD).isOf(ModItems.RESONANT_CROWN)) {
 			return;
 		}
 
