@@ -5,6 +5,7 @@ import com.namith.resonantcaves.block.entity.ModBlockEntities;
 import com.namith.resonantcaves.energy.LivingTreeEnergyStorage;
 import com.namith.resonantcaves.item.ModItems;
 import net.fabricmc.api.ModInitializer;
+import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.server.world.ServerWorld;
 import org.slf4j.Logger;
@@ -46,7 +47,8 @@ public class ResonantCaves implements ModInitializer {
 		// Feature 8: Living Tree — a vanilla log on grass, fed RF by a cable, grows into a tree
 		// of its own species and shrinks (dropping logs normally) when power isn't sustained.
 		EnergyStorage.SIDED.registerForBlocks((world, pos, state, blockEntity, direction) -> {
-			if (!(world instanceof ServerWorld serverWorld) || !world.getBlockState(pos.down()).isOf(Blocks.GRASS_BLOCK)) {
+			Block below = world.getBlockState(pos.down()).getBlock();
+			if (!(world instanceof ServerWorld serverWorld) || !(below == Blocks.GRASS_BLOCK || below == Blocks.DIRT)) {
 				return null;
 			}
 			LivingTreeState treeState = LivingTreeState.getOrCreate(serverWorld);
