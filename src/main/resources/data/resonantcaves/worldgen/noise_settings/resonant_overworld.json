@@ -12,8 +12,8 @@
   "disable_mob_generation": false,
   "legacy_random_source": false,
   "noise": {
-    "height": 384,
-    "min_y": -64,
+    "height": 512,
+    "min_y": -256,
     "size_horizontal": 1,
     "size_vertical": 2
   },
@@ -25,7 +25,7 @@
       "y_scale": 0.5
     },
     "continents": "minecraft:overworld/continents",
-    "depth": "minecraft:overworld/depth",
+    "depth": "resonantcaves:overworld/depth",
     "erosion": "minecraft:overworld/erosion",
     "final_density": {
       "type": "minecraft:min",
@@ -46,9 +46,9 @@
                   "argument1": {
                     "type": "minecraft:y_clamped_gradient",
                     "from_value": 0.0,
-                    "from_y": -64,
+                    "from_y": -256,
                     "to_value": 1.0,
-                    "to_y": -40
+                    "to_y": -232
                   },
                   "argument2": {
                     "type": "minecraft:add",
@@ -61,9 +61,9 @@
                         "argument1": {
                           "type": "minecraft:y_clamped_gradient",
                           "from_value": 1.0,
-                          "from_y": 457,
+                          "from_y": 177,
                           "to_value": 0.0,
-                          "to_y": 473
+                          "to_y": 193
                         },
                         "argument2": {
                           "type": "minecraft:add",
@@ -186,9 +186,9 @@
         "argument1": {
           "type": "minecraft:y_clamped_gradient",
           "from_value": 0.0,
-          "from_y": -64,
+          "from_y": -256,
           "to_value": 1.0,
-          "to_y": -40
+          "to_y": -232
         },
         "argument2": {
           "type": "minecraft:add",
@@ -201,9 +201,9 @@
               "argument1": {
                 "type": "minecraft:y_clamped_gradient",
                 "from_value": 1.0,
-                "from_y": 457,
+                "from_y": 177,
                 "to_value": 0.0,
-                "to_y": 473
+                "to_y": 193
               },
               "argument2": {
                 "type": "minecraft:add",
@@ -281,8 +281,8 @@
             "argument": {
               "type": "minecraft:range_choice",
               "input": "minecraft:y",
-              "max_exclusive": 51.0,
-              "min_inclusive": -60.0,
+              "max_exclusive": -141.0,
+              "min_inclusive": -252.0,
               "when_in_range": {
                 "type": "minecraft:noise",
                 "noise": "minecraft:ore_vein_a",
@@ -300,8 +300,8 @@
             "argument": {
               "type": "minecraft:range_choice",
               "input": "minecraft:y",
-              "max_exclusive": 51.0,
-              "min_inclusive": -60.0,
+              "max_exclusive": -141.0,
+              "min_inclusive": -252.0,
               "when_in_range": {
                 "type": "minecraft:noise",
                 "noise": "minecraft:ore_vein_b",
@@ -319,8 +319,8 @@
       "argument": {
         "type": "minecraft:range_choice",
         "input": "minecraft:y",
-        "max_exclusive": 51.0,
-        "min_inclusive": -60.0,
+        "max_exclusive": -141.0,
+        "min_inclusive": -252.0,
         "when_in_range": {
           "type": "minecraft:noise",
           "noise": "minecraft:ore_veininess",
@@ -332,7 +332,7 @@
     }
   },
   "ore_veins_enabled": true,
-  "sea_level": 280,
+  "sea_level": 0,
   "spawn_target": [
     {
       "continentalness": [
@@ -439,7 +439,7 @@
                         "type": "minecraft:y_above",
                         "add_stone_depth": false,
                         "anchor": {
-                          "absolute": 97
+                          "absolute": 34
                         },
                         "surface_depth_multiplier": 2
                       },
@@ -538,7 +538,7 @@
                         "type": "minecraft:y_above",
                         "add_stone_depth": false,
                         "anchor": {
-                          "absolute": 62
+                          "absolute": -1
                         },
                         "surface_depth_multiplier": 0
                       },
@@ -550,7 +550,7 @@
                             "type": "minecraft:y_above",
                             "add_stone_depth": false,
                             "anchor": {
-                              "absolute": 63
+                              "absolute": 0
                             },
                             "surface_depth_multiplier": 0
                           }
@@ -590,7 +590,7 @@
                         "type": "minecraft:y_above",
                         "add_stone_depth": false,
                         "anchor": {
-                          "absolute": 60
+                          "absolute": -3
                         },
                         "surface_depth_multiplier": 0
                       },
@@ -602,7 +602,7 @@
                             "type": "minecraft:y_above",
                             "add_stone_depth": false,
                             "anchor": {
-                              "absolute": 63
+                              "absolute": 0
                             },
                             "surface_depth_multiplier": 0
                           }
@@ -679,7 +679,7 @@
                             "type": "minecraft:y_above",
                             "add_stone_depth": true,
                             "anchor": {
-                              "absolute": 74
+                              "absolute": 11
                             },
                             "surface_depth_multiplier": 1
                           },
@@ -839,7 +839,7 @@
                       "type": "minecraft:y_above",
                       "add_stone_depth": true,
                       "anchor": {
-                        "absolute": 63
+                        "absolute": 0
                       },
                       "surface_depth_multiplier": -1
                     },
@@ -852,7 +852,7 @@
                             "type": "minecraft:y_above",
                             "add_stone_depth": false,
                             "anchor": {
-                              "absolute": 63
+                              "absolute": 0
                             },
                             "surface_depth_multiplier": 0
                           },
@@ -864,7 +864,7 @@
                                 "type": "minecraft:y_above",
                                 "add_stone_depth": true,
                                 "anchor": {
-                                  "absolute": 74
+                                  "absolute": 11
                                 },
                                 "surface_depth_multiplier": 1
                               }
@@ -2520,11 +2520,11 @@
         "if_true": {
           "type": "minecraft:vertical_gradient",
           "false_at_and_above": {
-            "absolute": 8
+            "absolute": -184
           },
           "random_name": "minecraft:deepslate",
           "true_at_and_below": {
-            "absolute": 0
+            "absolute": -192
           }
         },
         "then_run": {

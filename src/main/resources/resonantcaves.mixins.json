@@ -4,11 +4,15 @@
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
 		"AbstractBlockStateMixin",
-		"CreeperTargetingMixin"
+		"AquiferLavaThresholdMixin",
+		"CreeperTargetingMixin",
+		"NoiseChunkGeneratorLavaLevelMixin",
+		"WorldPresetsMixin"
 	],
 	"client": [
 		"StatusEffectIconMixin",
-		"NightVisionStrengthMixin"
+		"NightVisionStrengthMixin",
+		"CloudHeightMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
