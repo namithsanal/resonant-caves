@@ -20,9 +20,6 @@ public class ResonantCaves implements ModInitializer {
 		// Feature 1: stone and deepslate cannot be mined.
 		UnbreakableBlocks.register();
 
-		// Feature 2: large herds of sheep, cows, pigs, chickens, and horses.
-		HerdSpawning.register();
-
 		// Feature 6: creeper pack spawning.
 		CreeperPackSpawning.register();
 
