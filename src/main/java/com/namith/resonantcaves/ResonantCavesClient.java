@@ -43,13 +43,14 @@ public class ResonantCavesClient implements ClientModInitializer {
 	private static final int MAX_ALPHA = 200;
 	private static final double BREATH_PERIOD_TICKS = 300.0;
 	private static final double WANDER_AMPLITUDE = 0.25;
-	// The orb fades between a dark teal (ender pearl) and a light bluish-green (vanilla's GLOW particle).
-	private static final int DARK_RED = 16;
-	private static final int DARK_GREEN = 94;
-	private static final int DARK_BLUE = 81;
-	private static final int LIGHT_RED = 153;
-	private static final int LIGHT_GREEN = 255;
-	private static final int LIGHT_BLUE = 204;
+	// The orb fades between a muted coral-red and a light salmon-peach — both sampled directly
+	// from resonant_ore.png's speckle palette, matching Resonant Ore's theme.
+	private static final int DARK_RED = 200;
+	private static final int DARK_GREEN = 90;
+	private static final int DARK_BLUE = 80;
+	private static final int LIGHT_RED = 255;
+	private static final int LIGHT_GREEN = 170;
+	private static final int LIGHT_BLUE = 150;
 	private static final Identifier ORB_TEXTURE = Identifier.of("resonantcaves", "textures/misc/radar_orb.png");
 
 	@Override
