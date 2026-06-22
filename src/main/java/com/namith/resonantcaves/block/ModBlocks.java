@@ -46,12 +46,90 @@ public final class ModBlocks {
 			Identifier.of(ResonantCaves.MOD_ID, "resonant_ore"),
 			new BlockItem(RESONANT_ORE, new Item.Settings()));
 
+	// Energy infrastructure (cables) — three tiers, worst-to-best IRON/COPPER/GOLD. See EnergyTier
+	// for the loss-per-cable/minimum-throughput numbers that distinguish them.
+	public static final Block IRON_CABLE = register("iron_cable",
+			new CableBlock(EnergyTier.IRON, AbstractBlock.Settings.create()
+					.mapColor(MapColor.IRON_GRAY)
+					.strength(2.0F, 6.0F)
+					.sounds(BlockSoundGroup.METAL)
+					.nonOpaque()));
+
+	public static final Block COPPER_CABLE = register("copper_cable",
+			new CableBlock(EnergyTier.COPPER, AbstractBlock.Settings.copyShallow(IRON_CABLE)
+					.mapColor(MapColor.ORANGE)));
+
+	public static final Block GOLD_CABLE = register("gold_cable",
+			new CableBlock(EnergyTier.GOLD, AbstractBlock.Settings.copyShallow(IRON_CABLE)
+					.mapColor(MapColor.GOLD)));
+
+	public static final Item IRON_CABLE_ITEM = registerBlockItem("iron_cable", IRON_CABLE);
+	public static final Item COPPER_CABLE_ITEM = registerBlockItem("copper_cable", COPPER_CABLE);
+	public static final Item GOLD_CABLE_ITEM = registerBlockItem("gold_cable", GOLD_CABLE);
+
+	// Stations — single block, one output face (see StationBlock).
+	public static final Block IRON_STATION = register("iron_station",
+			new StationBlock(EnergyTier.IRON, AbstractBlock.Settings.create()
+					.mapColor(MapColor.IRON_GRAY)
+					.strength(3.5F, 6.0F)
+					.sounds(BlockSoundGroup.METAL)));
+
+	public static final Block COPPER_STATION = register("copper_station",
+			new StationBlock(EnergyTier.COPPER, AbstractBlock.Settings.copyShallow(IRON_STATION)
+					.mapColor(MapColor.ORANGE)));
+
+	public static final Block GOLD_STATION = register("gold_station",
+			new StationBlock(EnergyTier.GOLD, AbstractBlock.Settings.copyShallow(IRON_STATION)
+					.mapColor(MapColor.GOLD)));
+
+	public static final Item IRON_STATION_ITEM = registerBlockItem("iron_station", IRON_STATION);
+	public static final Item COPPER_STATION_ITEM = registerBlockItem("copper_station", COPPER_STATION);
+	public static final Item GOLD_STATION_ITEM = registerBlockItem("gold_station", GOLD_STATION);
+
+	// Monitor — ambient flow/status display, see MonitorBlock/MonitorBlockEntity.
+	public static final Block ENERGY_MONITOR = register("energy_monitor",
+			new MonitorBlock(AbstractBlock.Settings.create()
+					.mapColor(MapColor.LIGHT_GRAY)
+					.strength(2.0F, 6.0F)
+					.sounds(BlockSoundGroup.METAL)
+					.nonOpaque()));
+
+	public static final Item ENERGY_MONITOR_ITEM = registerBlockItem("energy_monitor", ENERGY_MONITOR);
+
+	// Creative Station — a debug/testing energy source, not craftable; same creative-tab-only,
+	// /give-able distribution convention as vanilla's Light Block/Barrier.
+	public static final Block CREATIVE_STATION = register("creative_station",
+			new CreativeStationBlock(AbstractBlock.Settings.create()
+					.mapColor(MapColor.PINK)
+					.strength(3.5F, 6.0F)
+					.sounds(BlockSoundGroup.METAL)));
+
+	public static final Item CREATIVE_STATION_ITEM = registerBlockItem("creative_station", CREATIVE_STATION);
+
 	private static Block register(String name, Block block) {
 		return Registry.register(Registries.BLOCK, Identifier.of(ResonantCaves.MOD_ID, name), block);
+	}
+
+	private static Item registerBlockItem(String name, Block block) {
+		return Registry.register(Registries.ITEM,
+				Identifier.of(ResonantCaves.MOD_ID, name),
+				new BlockItem(block, new Item.Settings()));
 	}
 
 	public static void register() {
 		RegistryKey<ItemGroup> natural = RegistryKey.of(RegistryKeys.ITEM_GROUP, Identifier.of("minecraft", "natural"));
 		ItemGroupEvents.modifyEntriesEvent(natural).register(entries -> entries.prepend(RESONANT_ORE_ITEM));
+
+		RegistryKey<ItemGroup> redstone = RegistryKey.of(RegistryKeys.ITEM_GROUP, Identifier.of("minecraft", "redstone"));
+		ItemGroupEvents.modifyEntriesEvent(redstone).register(entries -> {
+			entries.add(IRON_CABLE_ITEM);
+			entries.add(COPPER_CABLE_ITEM);
+			entries.add(GOLD_CABLE_ITEM);
+			entries.add(IRON_STATION_ITEM);
+			entries.add(COPPER_STATION_ITEM);
+			entries.add(GOLD_STATION_ITEM);
+			entries.add(ENERGY_MONITOR_ITEM);
+			entries.add(CREATIVE_STATION_ITEM);
+		});
 	}
 }

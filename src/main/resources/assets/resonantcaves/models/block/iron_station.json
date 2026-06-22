@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "resonantcaves:block/iron_station_side",
+    "north": "resonantcaves:block/iron_station_front",
+    "south": "resonantcaves:block/iron_station_side",
+    "east": "resonantcaves:block/iron_station_side",
+    "west": "resonantcaves:block/iron_station_side",
+    "up": "resonantcaves:block/iron_station_side",
+    "down": "resonantcaves:block/iron_station_side"
+  }
+}

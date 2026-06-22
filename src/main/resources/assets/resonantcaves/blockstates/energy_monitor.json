@@ -1,0 +1,424 @@
+{
+  "variants": {
+    "facing=north,flow=none,status=idle": {
+      "model": "resonantcaves:block/monitor_idle"
+    },
+    "facing=north,flow=up,status=idle": {
+      "model": "resonantcaves:block/monitor_idle"
+    },
+    "facing=north,flow=right,status=idle": {
+      "model": "resonantcaves:block/monitor_idle"
+    },
+    "facing=north,flow=down,status=idle": {
+      "model": "resonantcaves:block/monitor_idle"
+    },
+    "facing=north,flow=left,status=idle": {
+      "model": "resonantcaves:block/monitor_idle"
+    },
+    "facing=north,flow=none,status=underutilized": {
+      "model": "resonantcaves:block/monitor_underutilized_up"
+    },
+    "facing=north,flow=up,status=underutilized": {
+      "model": "resonantcaves:block/monitor_underutilized_up"
+    },
+    "facing=north,flow=right,status=underutilized": {
+      "model": "resonantcaves:block/monitor_underutilized_right"
+    },
+    "facing=north,flow=down,status=underutilized": {
+      "model": "resonantcaves:block/monitor_underutilized_down"
+    },
+    "facing=north,flow=left,status=underutilized": {
+      "model": "resonantcaves:block/monitor_underutilized_left"
+    },
+    "facing=north,flow=none,status=optimal": {
+      "model": "resonantcaves:block/monitor_optimal_up"
+    },
+    "facing=north,flow=up,status=optimal": {
+      "model": "resonantcaves:block/monitor_optimal_up"
+    },
+    "facing=north,flow=right,status=optimal": {
+      "model": "resonantcaves:block/monitor_optimal_right"
+    },
+    "facing=north,flow=down,status=optimal": {
+      "model": "resonantcaves:block/monitor_optimal_down"
+    },
+    "facing=north,flow=left,status=optimal": {
+      "model": "resonantcaves:block/monitor_optimal_left"
+    },
+    "facing=north,flow=none,status=overloaded": {
+      "model": "resonantcaves:block/monitor_overloaded_up"
+    },
+    "facing=north,flow=up,status=overloaded": {
+      "model": "resonantcaves:block/monitor_overloaded_up"
+    },
+    "facing=north,flow=right,status=overloaded": {
+      "model": "resonantcaves:block/monitor_overloaded_right"
+    },
+    "facing=north,flow=down,status=overloaded": {
+      "model": "resonantcaves:block/monitor_overloaded_down"
+    },
+    "facing=north,flow=left,status=overloaded": {
+      "model": "resonantcaves:block/monitor_overloaded_left"
+    },
+    "facing=east,flow=none,status=idle": {
+      "model": "resonantcaves:block/monitor_idle",
+      "y": 90
+    },
+    "facing=east,flow=up,status=idle": {
+      "model": "resonantcaves:block/monitor_idle",
+      "y": 90
+    },
+    "facing=east,flow=right,status=idle": {
+      "model": "resonantcaves:block/monitor_idle",
+      "y": 90
+    },
+    "facing=east,flow=down,status=idle": {
+      "model": "resonantcaves:block/monitor_idle",
+      "y": 90
+    },
+    "facing=east,flow=left,status=idle": {
+      "model": "resonantcaves:block/monitor_idle",
+      "y": 90
+    },
+    "facing=east,flow=none,status=underutilized": {
+      "model": "resonantcaves:block/monitor_underutilized_up",
+      "y": 90
+    },
+    "facing=east,flow=up,status=underutilized": {
+      "model": "resonantcaves:block/monitor_underutilized_up",
+      "y": 90
+    },
+    "facing=east,flow=right,status=underutilized": {
+      "model": "resonantcaves:block/monitor_underutilized_right",
+      "y": 90
+    },
+    "facing=east,flow=down,status=underutilized": {
+      "model": "resonantcaves:block/monitor_underutilized_down",
+      "y": 90
+    },
+    "facing=east,flow=left,status=underutilized": {
+      "model": "resonantcaves:block/monitor_underutilized_left",
+      "y": 90
+    },
+    "facing=east,flow=none,status=optimal": {
+      "model": "resonantcaves:block/monitor_optimal_up",
+      "y": 90
+    },
+    "facing=east,flow=up,status=optimal": {
+      "model": "resonantcaves:block/monitor_optimal_up",
+      "y": 90
+    },
+    "facing=east,flow=right,status=optimal": {
+      "model": "resonantcaves:block/monitor_optimal_right",
+      "y": 90
+    },
+    "facing=east,flow=down,status=optimal": {
+      "model": "resonantcaves:block/monitor_optimal_down",
+      "y": 90
+    },
+    "facing=east,flow=left,status=optimal": {
+      "model": "resonantcaves:block/monitor_optimal_left",
+      "y": 90
+    },
+    "facing=east,flow=none,status=overloaded": {
+      "model": "resonantcaves:block/monitor_overloaded_up",
+      "y": 90
+    },
+    "facing=east,flow=up,status=overloaded": {
+      "model": "resonantcaves:block/monitor_overloaded_up",
+      "y": 90
+    },
+    "facing=east,flow=right,status=overloaded": {
+      "model": "resonantcaves:block/monitor_overloaded_right",
+      "y": 90
+    },
+    "facing=east,flow=down,status=overloaded": {
+      "model": "resonantcaves:block/monitor_overloaded_down",
+      "y": 90
+    },
+    "facing=east,flow=left,status=overloaded": {
+      "model": "resonantcaves:block/monitor_overloaded_left",
+      "y": 90
+    },
+    "facing=south,flow=none,status=idle": {
+      "model": "resonantcaves:block/monitor_idle",
+      "y": 180
+    },
+    "facing=south,flow=up,status=idle": {
+      "model": "resonantcaves:block/monitor_idle",
+      "y": 180
+    },
+    "facing=south,flow=right,status=idle": {
+      "model": "resonantcaves:block/monitor_idle",
+      "y": 180
+    },
+    "facing=south,flow=down,status=idle": {
+      "model": "resonantcaves:block/monitor_idle",
+      "y": 180
+    },
+    "facing=south,flow=left,status=idle": {
+      "model": "resonantcaves:block/monitor_idle",
+      "y": 180
+    },
+    "facing=south,flow=none,status=underutilized": {
+      "model": "resonantcaves:block/monitor_underutilized_up",
+      "y": 180
+    },
+    "facing=south,flow=up,status=underutilized": {
+      "model": "resonantcaves:block/monitor_underutilized_up",
+      "y": 180
+    },
+    "facing=south,flow=right,status=underutilized": {
+      "model": "resonantcaves:block/monitor_underutilized_right",
+      "y": 180
+    },
+    "facing=south,flow=down,status=underutilized": {
+      "model": "resonantcaves:block/monitor_underutilized_down",
+      "y": 180
+    },
+    "facing=south,flow=left,status=underutilized": {
+      "model": "resonantcaves:block/monitor_underutilized_left",
+      "y": 180
+    },
+    "facing=south,flow=none,status=optimal": {
+      "model": "resonantcaves:block/monitor_optimal_up",
+      "y": 180
+    },
+    "facing=south,flow=up,status=optimal": {
+      "model": "resonantcaves:block/monitor_optimal_up",
+      "y": 180
+    },
+    "facing=south,flow=right,status=optimal": {
+      "model": "resonantcaves:block/monitor_optimal_right",
+      "y": 180
+    },
+    "facing=south,flow=down,status=optimal": {
+      "model": "resonantcaves:block/monitor_optimal_down",
+      "y": 180
+    },
+    "facing=south,flow=left,status=optimal": {
+      "model": "resonantcaves:block/monitor_optimal_left",
+      "y": 180
+    },
+    "facing=south,flow=none,status=overloaded": {
+      "model": "resonantcaves:block/monitor_overloaded_up",
+      "y": 180
+    },
+    "facing=south,flow=up,status=overloaded": {
+      "model": "resonantcaves:block/monitor_overloaded_up",
+      "y": 180
+    },
+    "facing=south,flow=right,status=overloaded": {
+      "model": "resonantcaves:block/monitor_overloaded_right",
+      "y": 180
+    },
+    "facing=south,flow=down,status=overloaded": {
+      "model": "resonantcaves:block/monitor_overloaded_down",
+      "y": 180
+    },
+    "facing=south,flow=left,status=overloaded": {
+      "model": "resonantcaves:block/monitor_overloaded_left",
+      "y": 180
+    },
+    "facing=west,flow=none,status=idle": {
+      "model": "resonantcaves:block/monitor_idle",
+      "y": 270
+    },
+    "facing=west,flow=up,status=idle": {
+      "model": "resonantcaves:block/monitor_idle",
+      "y": 270
+    },
+    "facing=west,flow=right,status=idle": {
+      "model": "resonantcaves:block/monitor_idle",
+      "y": 270
+    },
+    "facing=west,flow=down,status=idle": {
+      "model": "resonantcaves:block/monitor_idle",
+      "y": 270
+    },
+    "facing=west,flow=left,status=idle": {
+      "model": "resonantcaves:block/monitor_idle",
+      "y": 270
+    },
+    "facing=west,flow=none,status=underutilized": {
+      "model": "resonantcaves:block/monitor_underutilized_up",
+      "y": 270
+    },
+    "facing=west,flow=up,status=underutilized": {
+      "model": "resonantcaves:block/monitor_underutilized_up",
+      "y": 270
+    },
+    "facing=west,flow=right,status=underutilized": {
+      "model": "resonantcaves:block/monitor_underutilized_right",
+      "y": 270
+    },
+    "facing=west,flow=down,status=underutilized": {
+      "model": "resonantcaves:block/monitor_underutilized_down",
+      "y": 270
+    },
+    "facing=west,flow=left,status=underutilized": {
+      "model": "resonantcaves:block/monitor_underutilized_left",
+      "y": 270
+    },
+    "facing=west,flow=none,status=optimal": {
+      "model": "resonantcaves:block/monitor_optimal_up",
+      "y": 270
+    },
+    "facing=west,flow=up,status=optimal": {
+      "model": "resonantcaves:block/monitor_optimal_up",
+      "y": 270
+    },
+    "facing=west,flow=right,status=optimal": {
+      "model": "resonantcaves:block/monitor_optimal_right",
+      "y": 270
+    },
+    "facing=west,flow=down,status=optimal": {
+      "model": "resonantcaves:block/monitor_optimal_down",
+      "y": 270
+    },
+    "facing=west,flow=left,status=optimal": {
+      "model": "resonantcaves:block/monitor_optimal_left",
+      "y": 270
+    },
+    "facing=west,flow=none,status=overloaded": {
+      "model": "resonantcaves:block/monitor_overloaded_up",
+      "y": 270
+    },
+    "facing=west,flow=up,status=overloaded": {
+      "model": "resonantcaves:block/monitor_overloaded_up",
+      "y": 270
+    },
+    "facing=west,flow=right,status=overloaded": {
+      "model": "resonantcaves:block/monitor_overloaded_right",
+      "y": 270
+    },
+    "facing=west,flow=down,status=overloaded": {
+      "model": "resonantcaves:block/monitor_overloaded_down",
+      "y": 270
+    },
+    "facing=west,flow=left,status=overloaded": {
+      "model": "resonantcaves:block/monitor_overloaded_left",
+      "y": 270
+    },
+    "facing=up,flow=none,status=idle": {
+      "model": "resonantcaves:block/monitor_idle_top"
+    },
+    "facing=up,flow=up,status=idle": {
+      "model": "resonantcaves:block/monitor_idle_top"
+    },
+    "facing=up,flow=right,status=idle": {
+      "model": "resonantcaves:block/monitor_idle_top"
+    },
+    "facing=up,flow=down,status=idle": {
+      "model": "resonantcaves:block/monitor_idle_top"
+    },
+    "facing=up,flow=left,status=idle": {
+      "model": "resonantcaves:block/monitor_idle_top"
+    },
+    "facing=up,flow=none,status=underutilized": {
+      "model": "resonantcaves:block/monitor_underutilized_top_up"
+    },
+    "facing=up,flow=up,status=underutilized": {
+      "model": "resonantcaves:block/monitor_underutilized_top_up"
+    },
+    "facing=up,flow=right,status=underutilized": {
+      "model": "resonantcaves:block/monitor_underutilized_top_right"
+    },
+    "facing=up,flow=down,status=underutilized": {
+      "model": "resonantcaves:block/monitor_underutilized_top_down"
+    },
+    "facing=up,flow=left,status=underutilized": {
+      "model": "resonantcaves:block/monitor_underutilized_top_left"
+    },
+    "facing=up,flow=none,status=optimal": {
+      "model": "resonantcaves:block/monitor_optimal_top_up"
+    },
+    "facing=up,flow=up,status=optimal": {
+      "model": "resonantcaves:block/monitor_optimal_top_up"
+    },
+    "facing=up,flow=right,status=optimal": {
+      "model": "resonantcaves:block/monitor_optimal_top_right"
+    },
+    "facing=up,flow=down,status=optimal": {
+      "model": "resonantcaves:block/monitor_optimal_top_down"
+    },
+    "facing=up,flow=left,status=optimal": {
+      "model": "resonantcaves:block/monitor_optimal_top_left"
+    },
+    "facing=up,flow=none,status=overloaded": {
+      "model": "resonantcaves:block/monitor_overloaded_top_up"
+    },
+    "facing=up,flow=up,status=overloaded": {
+      "model": "resonantcaves:block/monitor_overloaded_top_up"
+    },
+    "facing=up,flow=right,status=overloaded": {
+      "model": "resonantcaves:block/monitor_overloaded_top_right"
+    },
+    "facing=up,flow=down,status=overloaded": {
+      "model": "resonantcaves:block/monitor_overloaded_top_down"
+    },
+    "facing=up,flow=left,status=overloaded": {
+      "model": "resonantcaves:block/monitor_overloaded_top_left"
+    },
+    "facing=down,flow=none,status=idle": {
+      "model": "resonantcaves:block/monitor_idle_bottom"
+    },
+    "facing=down,flow=up,status=idle": {
+      "model": "resonantcaves:block/monitor_idle_bottom"
+    },
+    "facing=down,flow=right,status=idle": {
+      "model": "resonantcaves:block/monitor_idle_bottom"
+    },
+    "facing=down,flow=down,status=idle": {
+      "model": "resonantcaves:block/monitor_idle_bottom"
+    },
+    "facing=down,flow=left,status=idle": {
+      "model": "resonantcaves:block/monitor_idle_bottom"
+    },
+    "facing=down,flow=none,status=underutilized": {
+      "model": "resonantcaves:block/monitor_underutilized_bottom_up"
+    },
+    "facing=down,flow=up,status=underutilized": {
+      "model": "resonantcaves:block/monitor_underutilized_bottom_up"
+    },
+    "facing=down,flow=right,status=underutilized": {
+      "model": "resonantcaves:block/monitor_underutilized_bottom_right"
+    },
+    "facing=down,flow=down,status=underutilized": {
+      "model": "resonantcaves:block/monitor_underutilized_bottom_down"
+    },
+    "facing=down,flow=left,status=underutilized": {
+      "model": "resonantcaves:block/monitor_underutilized_bottom_left"
+    },
+    "facing=down,flow=none,status=optimal": {
+      "model": "resonantcaves:block/monitor_optimal_bottom_up"
+    },
+    "facing=down,flow=up,status=optimal": {
+      "model": "resonantcaves:block/monitor_optimal_bottom_up"
+    },
+    "facing=down,flow=right,status=optimal": {
+      "model": "resonantcaves:block/monitor_optimal_bottom_right"
+    },
+    "facing=down,flow=down,status=optimal": {
+      "model": "resonantcaves:block/monitor_optimal_bottom_down"
+    },
+    "facing=down,flow=left,status=optimal": {
+      "model": "resonantcaves:block/monitor_optimal_bottom_left"
+    },
+    "facing=down,flow=none,status=overloaded": {
+      "model": "resonantcaves:block/monitor_overloaded_bottom_up"
+    },
+    "facing=down,flow=up,status=overloaded": {
+      "model": "resonantcaves:block/monitor_overloaded_bottom_up"
+    },
+    "facing=down,flow=right,status=overloaded": {
+      "model": "resonantcaves:block/monitor_overloaded_bottom_right"
+    },
+    "facing=down,flow=down,status=overloaded": {
+      "model": "resonantcaves:block/monitor_overloaded_bottom_down"
+    },
+    "facing=down,flow=left,status=overloaded": {
+      "model": "resonantcaves:block/monitor_overloaded_bottom_left"
+    }
+  }
+}

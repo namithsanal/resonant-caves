@@ -1,0 +1,6 @@
+{
+	"parent": "resonantcaves:block/template/thin_cable_side",
+	"textures": {
+		"cable": "resonantcaves:block/iron_cable"
+	}
+}

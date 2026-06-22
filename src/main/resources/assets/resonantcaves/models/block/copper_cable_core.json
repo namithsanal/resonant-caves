@@ -1,0 +1,6 @@
+{
+	"parent": "resonantcaves:block/template/thin_cable_core",
+	"textures": {
+		"cable": "resonantcaves:block/copper_cable"
+	}
+}

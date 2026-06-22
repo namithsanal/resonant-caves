@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "resonantcaves:block/gold_station_side",
+    "north": "resonantcaves:block/gold_station_front",
+    "south": "resonantcaves:block/gold_station_side",
+    "east": "resonantcaves:block/gold_station_side",
+    "west": "resonantcaves:block/gold_station_side",
+    "up": "resonantcaves:block/gold_station_side",
+    "down": "resonantcaves:block/gold_station_side"
+  }
+}

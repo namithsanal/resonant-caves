@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "resonantcaves:block/creative_station_side",
+    "north": "resonantcaves:block/creative_station_front",
+    "south": "resonantcaves:block/creative_station_side",
+    "east": "resonantcaves:block/creative_station_side",
+    "west": "resonantcaves:block/creative_station_side",
+    "up": "resonantcaves:block/creative_station_side",
+    "down": "resonantcaves:block/creative_station_side"
+  }
+}

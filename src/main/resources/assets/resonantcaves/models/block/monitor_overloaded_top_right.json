@@ -1,0 +1,42 @@
+{
+  "textures": {
+    "particle": "resonantcaves:block/monitor_side",
+    "front": "resonantcaves:block/monitor_front_overloaded",
+    "side": "resonantcaves:block/monitor_side"
+  },
+  "elements": [
+    {
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        16,
+        2,
+        16
+      ],
+      "faces": {
+        "up": {
+          "texture": "#front",
+          "rotation": 90
+        },
+        "down": {
+          "texture": "#side"
+        },
+        "north": {
+          "texture": "#side"
+        },
+        "south": {
+          "texture": "#side"
+        },
+        "east": {
+          "texture": "#side"
+        },
+        "west": {
+          "texture": "#side"
+        }
+      }
+    }
+  ]
+}

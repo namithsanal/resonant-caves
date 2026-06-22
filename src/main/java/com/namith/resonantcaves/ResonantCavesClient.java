@@ -1,8 +1,15 @@
 package com.namith.resonantcaves;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.namith.resonantcaves.client.gui.MonitorScreen;
+import com.namith.resonantcaves.client.gui.StationScreen;
 import com.namith.resonantcaves.item.ModItems;
+import com.namith.resonantcaves.network.payload.MonitorHistoryUpdatePayload;
+import com.namith.resonantcaves.network.payload.OpenMonitorScreenPayload;
+import com.namith.resonantcaves.network.payload.OpenStationScreenPayload;
+import com.namith.resonantcaves.network.payload.StationStateUpdatePayload;
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderContext;
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
 import net.minecraft.client.MinecraftClient;
@@ -48,6 +55,30 @@ public class ResonantCavesClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
 		WorldRenderEvents.AFTER_TRANSLUCENT.register(ResonantCavesClient::renderRadar);
+
+		// Monitor/station GUIs have no ScreenHandler — these payloads just say which Screen to open
+		// (and seed it with the current data) or which already-open screen to push an update into.
+		ClientPlayNetworking.registerGlobalReceiver(OpenMonitorScreenPayload.ID, (payload, context) ->
+				context.client().execute(() -> context.client().setScreen(new MonitorScreen(
+						payload.pos(), payload.tier(), payload.history(), payload.flowDirection()))));
+
+		ClientPlayNetworking.registerGlobalReceiver(MonitorHistoryUpdatePayload.ID, (payload, context) ->
+				context.client().execute(() -> {
+					if (context.client().currentScreen instanceof MonitorScreen screen && screen.getPos().equals(payload.pos())) {
+						screen.appendSample(payload.newSample(), payload.flowDirection());
+					}
+				}));
+
+		ClientPlayNetworking.registerGlobalReceiver(OpenStationScreenPayload.ID, (payload, context) ->
+				context.client().execute(() -> context.client().setScreen(new StationScreen(
+						payload.pos(), payload.tier(), payload.creative(), payload.storedEnergy(), payload.targetOutput(), payload.history()))));
+
+		ClientPlayNetworking.registerGlobalReceiver(StationStateUpdatePayload.ID, (payload, context) ->
+				context.client().execute(() -> {
+					if (context.client().currentScreen instanceof StationScreen screen && screen.getPos().equals(payload.pos())) {
+						screen.updateStoredEnergy(payload.storedEnergy(), payload.ratePerTick());
+					}
+				}));
 	}
 
 	private static void renderRadar(WorldRenderContext context) {

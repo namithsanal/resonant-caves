@@ -1,6 +1,14 @@
 {
   "block.resonantcaves.resonant_ore": "Resonant Ore",
   "block.resonantcaves.deepslate_resonant_ore": "Deepslate Resonant Ore",
+  "block.resonantcaves.iron_cable": "Iron Cable",
+  "block.resonantcaves.copper_cable": "Copper Cable",
+  "block.resonantcaves.gold_cable": "Gold Cable",
+  "block.resonantcaves.iron_station": "Iron Station",
+  "block.resonantcaves.copper_station": "Copper Station",
+  "block.resonantcaves.gold_station": "Gold Station",
+  "block.resonantcaves.energy_monitor": "Energy Monitor",
+  "block.resonantcaves.creative_station": "Creative Station",
   "item.resonantcaves.resonant_helmet": "Resonant Helmet",
   "generator.resonantcaves.resonant_world": "Resonant World",
   "generator.minecraft.normal": "Vanilla World"

@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "resonantcaves:block/gold_station" },
+    "facing=south": { "model": "resonantcaves:block/gold_station", "y": 180 },
+    "facing=west": { "model": "resonantcaves:block/gold_station", "y": 270 },
+    "facing=east": { "model": "resonantcaves:block/gold_station", "y": 90 }
+  }
+}
