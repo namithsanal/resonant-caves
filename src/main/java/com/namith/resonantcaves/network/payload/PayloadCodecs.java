@@ -15,6 +15,14 @@ final class PayloadCodecs {
 	static final PacketCodec<ByteBuf, EnergyTier> ENERGY_TIER = PacketCodecs.VAR_INT.xmap(
 			ordinal -> EnergyTier.values()[ordinal], EnergyTier::ordinal);
 
+	/**
+	 * 0 encodes "no tier" (the Creative Station, which is deliberately tierless/untiered — it's a
+	 * debug source, not part of the tier economy); 1+ is {@code ordinal + 1}.
+	 */
+	static final PacketCodec<ByteBuf, @Nullable EnergyTier> NULLABLE_ENERGY_TIER = PacketCodecs.VAR_INT.xmap(
+			encoded -> encoded == 0 ? null : EnergyTier.values()[encoded - 1],
+			tier -> tier == null ? 0 : tier.ordinal() + 1);
+
 	/** 0 encodes "no direction" (a relay cable with no direct source/sink edge); 1+ is {@code ordinal + 1}. */
 	static final PacketCodec<ByteBuf, @Nullable Direction> NULLABLE_DIRECTION = PacketCodecs.VAR_INT.xmap(
 			encoded -> encoded == 0 ? null : Direction.values()[encoded - 1],

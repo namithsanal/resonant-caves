@@ -26,12 +26,9 @@ import org.jetbrains.annotations.Nullable;
  */
 public class MonitorBlockEntity extends BlockEntity {
 	private static final int TICK_INTERVAL = 20;
-	/** 3 in-game days (24,000 ticks each) sampled once per second (every 20 ticks). */
-	private static final int HISTORY_LENGTH = 3600;
 
 	private int tickCounter;
-	private final long[] history = new long[HISTORY_LENGTH];
-	private int historyWriteIndex;
+	private final SampleHistory history = new SampleHistory();
 
 	public MonitorBlockEntity(BlockPos pos, BlockState state) {
 		super(ModBlockEntities.MONITOR, pos, state);
@@ -72,8 +69,7 @@ public class MonitorBlockEntity extends BlockEntity {
 			flow = MonitorFlow.NONE;
 		}
 
-		entity.history[entity.historyWriteIndex] = sample;
-		entity.historyWriteIndex = (entity.historyWriteIndex + 1) % HISTORY_LENGTH;
+		entity.history.append(sample);
 		entity.markDirty();
 
 		BlockState newState = state.with(MonitorBlock.STATUS, status).with(MonitorBlock.FLOW, flow);
@@ -96,8 +92,7 @@ public class MonitorBlockEntity extends BlockEntity {
 
 	/** The most recently written sample, used for the once-per-second incremental update. */
 	public long getLatestSample() {
-		int lastIndex = (this.historyWriteIndex - 1 + HISTORY_LENGTH) % HISTORY_LENGTH;
-		return this.history[lastIndex];
+		return this.history.getLatest();
 	}
 
 	/**
@@ -112,11 +107,7 @@ public class MonitorBlockEntity extends BlockEntity {
 
 	/** The full history buffer in chronological order (oldest first), for the initial GUI-open payload. */
 	public long[] getHistorySnapshot() {
-		long[] snapshot = new long[HISTORY_LENGTH];
-		for (int i = 0; i < HISTORY_LENGTH; i++) {
-			snapshot[i] = this.history[(this.historyWriteIndex + i) % HISTORY_LENGTH];
-		}
-		return snapshot;
+		return this.history.snapshot();
 	}
 
 	/**
@@ -198,17 +189,12 @@ public class MonitorBlockEntity extends BlockEntity {
 	@Override
 	protected void writeNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
 		super.writeNbt(nbt, registryLookup);
-		nbt.putLongArray("History", this.history);
-		nbt.putInt("HistoryWriteIndex", this.historyWriteIndex);
+		this.history.writeNbt(nbt, "History");
 	}
 
 	@Override
 	protected void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
 		super.readNbt(nbt, registryLookup);
-		long[] saved = nbt.getLongArray("History");
-		if (saved.length == HISTORY_LENGTH) {
-			System.arraycopy(saved, 0, this.history, 0, HISTORY_LENGTH);
-		}
-		this.historyWriteIndex = nbt.contains("HistoryWriteIndex") ? nbt.getInt("HistoryWriteIndex") % HISTORY_LENGTH : 0;
+		this.history.readNbt(nbt, "History");
 	}
 }

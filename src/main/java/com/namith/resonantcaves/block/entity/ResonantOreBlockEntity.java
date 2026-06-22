@@ -2,7 +2,7 @@ package com.namith.resonantcaves.block.entity;
 
 import java.util.Random;
 
-import com.namith.resonantcaves.energy.ResonantEnergyStorage;
+import com.namith.resonantcaves.energy.FixedRateEnergyStorage;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.nbt.NbtCompound;
@@ -23,7 +23,7 @@ public class ResonantOreBlockEntity extends BlockEntity {
 	private static final double MODE_RATE = 4.0;
 	private static final double MAX_RATE = 15.0;
 
-	private final EnergyStorage energyStorage = new ResonantEnergyStorage(this::getGenerationRate);
+	private final EnergyStorage energyStorage = new FixedRateEnergyStorage(this::getGenerationRate);
 	private int generationRate;
 
 	public ResonantOreBlockEntity(BlockPos pos, BlockState state) {

@@ -27,8 +27,6 @@ import team.reborn.energy.api.base.SimpleEnergyStorage;
  */
 public class StationBlockEntity extends BlockEntity implements EnergyScreenSource {
 	private static final int LEAK_TICK_INTERVAL = 20;
-	/** 3 in-game days (24,000 ticks each) sampled once per second (every 20 ticks). */
-	private static final int HISTORY_LENGTH = 3600;
 
 	private final EnergyTier tier;
 	private final SimpleEnergyStorage realStorage = new SimpleEnergyStorage(Long.MAX_VALUE, Long.MAX_VALUE, Long.MAX_VALUE) {
@@ -41,8 +39,7 @@ public class StationBlockEntity extends BlockEntity implements EnergyScreenSourc
 
 	private long targetOutput = DEFAULT_TARGET_OUTPUT;
 	private int leakTickCounter;
-	private final long[] history = new long[HISTORY_LENGTH];
-	private int historyWriteIndex;
+	private final SampleHistory history = new SampleHistory();
 
 	public StationBlockEntity(BlockPos pos, BlockState state, EnergyTier tier) {
 		super(ModBlockEntities.STATION, pos, state);
@@ -60,11 +57,7 @@ public class StationBlockEntity extends BlockEntity implements EnergyScreenSourc
 
 	/** The full history buffer in chronological order (oldest first), for the initial GUI-open payload. */
 	public long[] getHistorySnapshot() {
-		long[] snapshot = new long[HISTORY_LENGTH];
-		for (int i = 0; i < HISTORY_LENGTH; i++) {
-			snapshot[i] = this.history[(this.historyWriteIndex + i) % HISTORY_LENGTH];
-		}
-		return snapshot;
+		return this.history.snapshot();
 	}
 
 	public long getTargetOutput() {
@@ -112,8 +105,7 @@ public class StationBlockEntity extends BlockEntity implements EnergyScreenSourc
 			entity.realStorage.amount = Math.max(0, amount - leaked);
 		}
 
-		entity.history[entity.historyWriteIndex] = entity.realStorage.amount;
-		entity.historyWriteIndex = (entity.historyWriteIndex + 1) % HISTORY_LENGTH;
+		entity.history.append(entity.realStorage.amount);
 		entity.markDirty();
 	}
 
@@ -122,8 +114,7 @@ public class StationBlockEntity extends BlockEntity implements EnergyScreenSourc
 		super.writeNbt(nbt, registryLookup);
 		nbt.putLong("StoredEnergy", this.realStorage.amount);
 		nbt.putLong("TargetOutput", this.targetOutput);
-		nbt.putLongArray("History", this.history);
-		nbt.putInt("HistoryWriteIndex", this.historyWriteIndex);
+		this.history.writeNbt(nbt, "History");
 	}
 
 	@Override
@@ -131,10 +122,6 @@ public class StationBlockEntity extends BlockEntity implements EnergyScreenSourc
 		super.readNbt(nbt, registryLookup);
 		this.realStorage.amount = nbt.getLong("StoredEnergy");
 		this.targetOutput = nbt.contains("TargetOutput") ? nbt.getLong("TargetOutput") : DEFAULT_TARGET_OUTPUT;
-		long[] saved = nbt.getLongArray("History");
-		if (saved.length == HISTORY_LENGTH) {
-			System.arraycopy(saved, 0, this.history, 0, HISTORY_LENGTH);
-		}
-		this.historyWriteIndex = nbt.contains("HistoryWriteIndex") ? nbt.getInt("HistoryWriteIndex") % HISTORY_LENGTH : 0;
+		this.history.readNbt(nbt, "History");
 	}
 }

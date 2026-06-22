@@ -1,10 +1,9 @@
 package com.namith.resonantcaves.block.entity;
 
-import com.namith.resonantcaves.block.EnergyTier;
+import com.namith.resonantcaves.energy.FixedRateEnergyStorage;
 import com.namith.resonantcaves.network.ModNetworking;
 import com.namith.resonantcaves.network.payload.OpenStationScreenPayload;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
-import net.fabricmc.fabric.api.transfer.v1.transaction.TransactionContext;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.nbt.NbtCompound;
@@ -24,32 +23,7 @@ public class CreativeStationBlockEntity extends BlockEntity implements EnergyScr
 
 	private long targetOutput = DEFAULT_TARGET_OUTPUT;
 
-	private final EnergyStorage storage = new EnergyStorage() {
-		@Override
-		public long insert(long maxAmount, TransactionContext transaction) {
-			return 0;
-		}
-
-		@Override
-		public boolean supportsInsertion() {
-			return false;
-		}
-
-		@Override
-		public long extract(long maxAmount, TransactionContext transaction) {
-			return Math.min(maxAmount, CreativeStationBlockEntity.this.targetOutput);
-		}
-
-		@Override
-		public long getAmount() {
-			return CreativeStationBlockEntity.this.targetOutput;
-		}
-
-		@Override
-		public long getCapacity() {
-			return CreativeStationBlockEntity.this.targetOutput;
-		}
-	};
+	private final EnergyStorage storage = new FixedRateEnergyStorage(() -> this.targetOutput);
 
 	public CreativeStationBlockEntity(BlockPos pos, BlockState state) {
 		super(ModBlockEntities.CREATIVE_STATION, pos, state);
@@ -77,7 +51,7 @@ public class CreativeStationBlockEntity extends BlockEntity implements EnergyScr
 		}
 		ModNetworking.trackOpenScreen(player, this.pos);
 		ServerPlayNetworking.send(player,
-				new OpenStationScreenPayload(this.pos, EnergyTier.GOLD, true, this.targetOutput, this.targetOutput, new long[0]));
+				new OpenStationScreenPayload(this.pos, null, true, this.targetOutput, this.targetOutput, new long[0]));
 	}
 
 	@Override
