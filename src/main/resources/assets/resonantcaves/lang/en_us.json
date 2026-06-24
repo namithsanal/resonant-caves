@@ -10,6 +10,8 @@
   "block.resonantcaves.energy_monitor": "Energy Monitor",
   "block.resonantcaves.creative_station": "Creative Station",
   "item.resonantcaves.resonant_helmet": "Resonant Helmet",
+  "item.resonantcaves.resonant_wand": "Resonant Wand",
+  "item.resonantcaves.resonant_wand.no_power": "No power source in range",
   "generator.resonantcaves.resonant_world": "Resonant World",
   "generator.minecraft.normal": "Vanilla World"
 }

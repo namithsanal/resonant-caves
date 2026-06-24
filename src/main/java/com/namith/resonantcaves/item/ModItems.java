@@ -45,6 +45,10 @@ public final class ModItems {
 			new ArmorItem(RESONANT, ArmorItem.Type.HELMET,
 					new Item.Settings().maxDamage(ArmorItem.Type.HELMET.getMaxDamage(15))));
 
+	public static final Item RESONANT_WAND = Registry.register(Registries.ITEM,
+			Identifier.of(ResonantCaves.MOD_ID, "resonant_wand"),
+			new ResonantWandItem(new Item.Settings().maxCount(1)));
+
 	// Only HELMET is used, but ArmorMaterial expects an entry per type; fill the rest with GOLD's values.
 	private static EnumMap<ArmorItem.Type, Integer> buildDefenseMap() {
 		EnumMap<ArmorItem.Type, Integer> map = new EnumMap<>(ArmorItem.Type.class);
@@ -58,6 +62,9 @@ public final class ModItems {
 
 	public static void register() {
 		ItemGroupEvents.modifyEntriesEvent(RegistryKey.of(RegistryKeys.ITEM_GROUP, Identifier.of("minecraft", "combat")))
-				.register(entries -> entries.add(RESONANT_HELMET));
+				.register(entries -> {
+					entries.add(RESONANT_HELMET);
+					entries.add(RESONANT_WAND);
+				});
 	}
 }

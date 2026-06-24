@@ -1,9 +1,11 @@
 package com.namith.resonantcaves.block.entity;
 
+import com.namith.resonantcaves.block.WandPowerSource;
 import com.namith.resonantcaves.energy.FixedRateEnergyStorage;
 import com.namith.resonantcaves.network.ModNetworking;
 import com.namith.resonantcaves.network.payload.OpenStationScreenPayload;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.nbt.NbtCompound;
@@ -18,7 +20,7 @@ import team.reborn.energy.api.EnergyStorage;
  * station's upper half uses ({@code StationScreen} in "creative" mode, which hides the
  * meaningless stored-energy line in favour of an "unlimited" label).
  */
-public class CreativeStationBlockEntity extends BlockEntity implements EnergyScreenSource {
+public class CreativeStationBlockEntity extends BlockEntity implements EnergyScreenSource, WandPowerSource {
 	private static final long DEFAULT_TARGET_OUTPUT = 1000L;
 
 	private long targetOutput = DEFAULT_TARGET_OUTPUT;
@@ -42,6 +44,15 @@ public class CreativeStationBlockEntity extends BlockEntity implements EnergyScr
 	public void setTargetOutput(long value) {
 		this.targetOutput = Math.max(0, value);
 		this.markDirty();
+	}
+
+	@Override
+	public long drawEnergyForWand(long maxAmount) {
+		try (Transaction tx = Transaction.openOuter()) {
+			long extracted = this.storage.extract(maxAmount, tx);
+			tx.commit();
+			return extracted;
+		}
 	}
 
 	/** Opens the station GUI in "creative" mode (hides the stored-energy line). */

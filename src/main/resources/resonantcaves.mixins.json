@@ -7,12 +7,15 @@
 		"AquiferLavaThresholdMixin",
 		"CreeperTargetingMixin",
 		"NoiseChunkGeneratorLavaLevelMixin",
+		"SkeletonWandMixin",
+		"SnowGolemWandMixin",
 		"WorldPresetsMixin"
 	],
 	"client": [
 		"StatusEffectIconMixin",
 		"NightVisionStrengthMixin",
-		"CloudHeightMixin"
+		"CloudHeightMixin",
+		"SnowGolemRendererMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

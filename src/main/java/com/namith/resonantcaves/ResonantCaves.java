@@ -53,5 +53,9 @@ public class ResonantCaves implements ModInitializer {
 		ModItems.register();
 		NightVisionRefresher.register();
 		ZombieHelmetSpawning.register();
+
+		// Resonant Wand — hitscan weapon fueled by nearby Station energy. Skeletons sometimes spawn
+		// holding one instead of a bow and always drop it on death.
+		SkeletonWandSpawning.register();
 	}
 }

@@ -2,9 +2,11 @@ package com.namith.resonantcaves.block.entity;
 
 import com.namith.resonantcaves.block.EnergyTier;
 import com.namith.resonantcaves.block.StationBlock;
+import com.namith.resonantcaves.block.WandPowerSource;
 import com.namith.resonantcaves.network.ModNetworking;
 import com.namith.resonantcaves.network.payload.OpenStationScreenPayload;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.nbt.NbtCompound;
@@ -25,7 +27,7 @@ import team.reborn.energy.api.base.SimpleEnergyStorage;
  * same cadence as the leak), graphed directly in {@code StationScreen} — the Energy Monitor block
  * graphs cable throughput only, not station storage; see {@code MonitorBlockEntity}.
  */
-public class StationBlockEntity extends BlockEntity implements EnergyScreenSource {
+public class StationBlockEntity extends BlockEntity implements EnergyScreenSource, WandPowerSource {
 	private static final int LEAK_TICK_INTERVAL = 20;
 
 	private final EnergyTier tier;
@@ -77,6 +79,16 @@ public class StationBlockEntity extends BlockEntity implements EnergyScreenSourc
 	public void setTargetOutput(long value) {
 		this.targetOutput = Math.max(0, value);
 		this.markDirty();
+	}
+
+	/** Draws directly from {@link #realStorage}, bypassing the {@code targetOutput}/{@code FACING} throttle entirely. */
+	@Override
+	public long drawEnergyForWand(long maxAmount) {
+		try (Transaction tx = Transaction.openOuter()) {
+			long extracted = this.realStorage.extract(maxAmount, tx);
+			tx.commit();
+			return extracted;
+		}
 	}
 
 	/** Opens this station's GUI (live stored-energy readout, history graph, and precise output setter) for the player. */
