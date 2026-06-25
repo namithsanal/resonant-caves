@@ -11,6 +11,7 @@ A Fabric mod for Minecraft **1.21.1** that overhauls survival around one core id
 5. **Creeper tech targeting** — Creepers sense and beeline toward blocks tagged `resonantcaves:creeper_attracting_blocks`, pre-populated with this mod's own energy-infrastructure blocks. On arrival, the creeper detonates normally — a standing threat to your power infrastructure that rewards defensive placement.
 6. **Creeper packs** — Creepers spawn in packs of 5-10.
 7. **Resonant Helmet** — A gold-tier helmet that grants permanent, dimmed Night Vision and a through-walls radar showing every hostile mob within 128 blocks as a faintly breathing orb. Not craftable: zombies have a small chance to spawn wearing one, and always drop it when killed.
+8. **Village Core** — Place this block and wire it into your power grid like a station to found a village. Sustained daily power funds growth: real vanilla houses (and farms, pens, and profession buildings — matched to the Core's biome) spring up around it, each with a starter villager, and villagers breed into spare beds over time. The Core never hoards power — it burns whatever's left at the end of each day — so growth has to be earned continuously, not banked up front. Run a deficit for too long and villagers start defecting to pillagers. A **Creative Village Core** (not craftable, creative-inventory only) always has a full tank, for watching the whole growth loop with no wiring at all.
 
 ## Requirements
 

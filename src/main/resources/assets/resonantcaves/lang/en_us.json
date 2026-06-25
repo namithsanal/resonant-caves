@@ -9,6 +9,8 @@
   "block.resonantcaves.gold_station": "Gold Station",
   "block.resonantcaves.energy_monitor": "Energy Monitor",
   "block.resonantcaves.creative_station": "Creative Station",
+  "block.resonantcaves.village_core": "Village Core",
+  "block.resonantcaves.creative_village_core": "Creative Village Core",
   "item.resonantcaves.resonant_helmet": "Resonant Helmet",
   "item.resonantcaves.resonant_wand": "Resonant Wand",
   "item.resonantcaves.resonant_wand.no_power": "No power source in range",

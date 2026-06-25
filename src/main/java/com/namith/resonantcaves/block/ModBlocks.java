@@ -106,6 +106,22 @@ public final class ModBlocks {
 
 	public static final Item CREATIVE_STATION_ITEM = registerBlockItem("creative_station", CREATIVE_STATION);
 
+	// Village Core — founds an auto-expanding village, powered by the cable network.
+	public static final Block VILLAGE_CORE = register("village_core",
+			new VillageCoreBlock(AbstractBlock.Settings.create()
+					.mapColor(MapColor.TERRACOTTA_WHITE)
+					.strength(3.5F, 6.0F)
+					.sounds(BlockSoundGroup.STONE)));
+
+	public static final Item VILLAGE_CORE_ITEM = registerBlockItem("village_core", VILLAGE_CORE);
+
+	// Creative Village Core — a debug/testing variant, always has a full tank; not craftable.
+	public static final Block CREATIVE_VILLAGE_CORE = register("creative_village_core",
+			new CreativeVillageCoreBlock(AbstractBlock.Settings.copyShallow(VILLAGE_CORE)
+					.mapColor(MapColor.PINK)));
+
+	public static final Item CREATIVE_VILLAGE_CORE_ITEM = registerBlockItem("creative_village_core", CREATIVE_VILLAGE_CORE);
+
 	private static Block register(String name, Block block) {
 		return Registry.register(Registries.BLOCK, Identifier.of(ResonantCaves.MOD_ID, name), block);
 	}
@@ -130,6 +146,8 @@ public final class ModBlocks {
 			entries.add(GOLD_STATION_ITEM);
 			entries.add(ENERGY_MONITOR_ITEM);
 			entries.add(CREATIVE_STATION_ITEM);
+			entries.add(VILLAGE_CORE_ITEM);
+			entries.add(CREATIVE_VILLAGE_CORE_ITEM);
 		});
 	}
 }

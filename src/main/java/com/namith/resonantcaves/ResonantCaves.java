@@ -44,6 +44,12 @@ public class ResonantCaves implements ModInitializer {
 				(blockEntity, direction) -> blockEntity.getEnergyStorage(),
 				ModBlockEntities.CREATIVE_STATION);
 
+		// Village Core — a pure energy sink that founds and grows an auto-expanding village; the
+		// Creative variant self-fills and deliberately exposes no EnergyStorage at all.
+		EnergyStorage.SIDED.registerForBlockEntity(
+				(blockEntity, direction) -> blockEntity.getEnergyStorage(),
+				ModBlockEntities.VILLAGE_CORE);
+
 		// Monitor/station GUIs — no ScreenHandler/inventory, just payloads telling the client which
 		// screen to open plus small periodic data pushes while it stays open.
 		ModNetworking.register();

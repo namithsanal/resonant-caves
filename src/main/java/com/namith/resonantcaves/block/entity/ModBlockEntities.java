@@ -45,6 +45,16 @@ public final class ModBlockEntities {
 			Identifier.of(ResonantCaves.MOD_ID, "creative_station"),
 			BlockEntityType.Builder.create(CreativeStationBlockEntity::new, ModBlocks.CREATIVE_STATION).build(null));
 
+	public static final BlockEntityType<VillageCoreBlockEntity> VILLAGE_CORE = Registry.register(
+			Registries.BLOCK_ENTITY_TYPE,
+			Identifier.of(ResonantCaves.MOD_ID, "village_core"),
+			BlockEntityType.Builder.create(VillageCoreBlockEntity::new, ModBlocks.VILLAGE_CORE).build(null));
+
+	public static final BlockEntityType<CreativeVillageCoreBlockEntity> CREATIVE_VILLAGE_CORE = Registry.register(
+			Registries.BLOCK_ENTITY_TYPE,
+			Identifier.of(ResonantCaves.MOD_ID, "creative_village_core"),
+			BlockEntityType.Builder.create(CreativeVillageCoreBlockEntity::new, ModBlocks.CREATIVE_VILLAGE_CORE).build(null));
+
 	public static void register() {
 		CableNetworkTicker.register();
 	}

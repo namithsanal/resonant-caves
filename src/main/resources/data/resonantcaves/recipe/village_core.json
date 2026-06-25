@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "E": {
+      "item": "minecraft:emerald"
+    },
+    "B": {
+      "item": "minecraft:bell"
+    }
+  },
+  "pattern": [
+    "IEI",
+    "EBE",
+    "IEI"
+  ],
+  "result": {
+    "count": 1,
+    "id": "resonantcaves:village_core"
+  }
+}
