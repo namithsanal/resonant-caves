@@ -11,6 +11,7 @@ A Fabric mod for Minecraft **1.21.1** that overhauls survival around one core id
 5. **Creeper tech targeting** — Creepers sense and beeline toward blocks tagged `resonantcaves:creeper_attracting_blocks`, pre-populated with this mod's own energy-infrastructure blocks. On arrival, the creeper detonates normally — a standing threat to your power infrastructure that rewards defensive placement.
 6. **Creeper packs** — Creepers spawn in packs of 5-10.
 7. **Resonant Helmet** — A gold-tier helmet that grants permanent, dimmed Night Vision and a through-walls radar showing every hostile mob within 128 blocks as a faintly breathing orb. Not craftable: zombies have a small chance to spawn wearing one, and always drop it when killed.
+8. **Resonant Wand** — A hitscan ranged weapon fueled by nearby Station energy. Right-click fires instantly at whatever you're looking at (up to 64 blocks), drawing RF from the nearest visible Station within 32 blocks. Damage scales with distance (triangular roll, 2–12). Skeletons sometimes spawn holding one instead of a bow and always drop it on death; right-clicking a Snow Golem with the wand equips it, giving the golem its own station-powered ranged attack.
 
 ## Requirements
 
@@ -33,9 +34,9 @@ The output jar is produced at `build/libs/resonantcaves-<version>.jar`.
 Other useful tasks:
 
 ```bash
-./gradlew genSources    # generate decompiled, Yarn-mapped Minecraft sources for reference
-./gradlew runClient     # launch a dev client
-./gradlew runServer     # launch a dev server
+JAVA_HOME=/path/to/jdk-21 ./gradlew genSources    # generate decompiled, Yarn-mapped Minecraft sources for reference
+JAVA_HOME=/path/to/jdk-21 ./gradlew runClient     # launch a dev client
+JAVA_HOME=/path/to/jdk-21 ./gradlew runServer     # launch a dev server
 ```
 
 ## Credits
