@@ -85,7 +85,7 @@ public class ResonantCavesClient implements ClientModInitializer {
 				}));
 
 		ClientPlayNetworking.registerGlobalReceiver(OpenVillageCoreScreenPayload.ID, (payload, context) ->
-				context.client().execute(() -> context.client().setScreen(new VillageCoreScreen(payload.pos()))));
+				context.client().execute(() -> context.client().setScreen(new VillageCoreScreen(payload.pos(), payload.depth()))));
 	}
 
 	private static void renderRadar(WorldRenderContext context) {

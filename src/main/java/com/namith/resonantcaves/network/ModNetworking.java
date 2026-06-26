@@ -1,10 +1,12 @@
 package com.namith.resonantcaves.network;
 
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
-import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import com.namith.resonantcaves.ResonantCaves;
+import com.namith.resonantcaves.block.entity.CreativeVillageCoreBlockEntity;
 import com.namith.resonantcaves.block.entity.EnergyScreenSource;
 import com.namith.resonantcaves.block.entity.MonitorBlockEntity;
 import com.namith.resonantcaves.network.payload.CloseScreenPayload;
@@ -21,11 +23,16 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.structure.pool.StructurePool;
+import net.minecraft.structure.pool.StructurePoolBasedGenerator;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
 
 /**
  * Registers this mod's GUI payloads (no {@code ScreenHandler}/inventory is used anywhere — these
@@ -65,21 +72,37 @@ public final class ModNetworking {
 				context.server().execute(() -> {
 					ServerWorld world = context.player().getServerWorld();
 					BlockPos pos = payload.pos();
-					// Save state so the core block can be restored if the village overwrites it.
 					BlockState savedState = world.getBlockState(pos);
-					try {
-						world.getServer().getCommandManager().getDispatcher().execute(
-								"place structure minecraft:village_plains "
-										+ pos.getX() + " " + pos.getY() + " " + pos.getZ(),
-								world.getServer().getCommandSource()
-										.withWorld(world)
-										.withPosition(Vec3d.ofCenter(pos)));
-					} catch (CommandSyntaxException e) {
-						// Village placement failed (wrong dimension, biome check, etc.) — leave world unchanged.
+					int depth = Math.max(1, Math.min(10, payload.depth()));
+
+					RegistryKey<StructurePool> poolKey = RegistryKey.of(
+							RegistryKeys.TEMPLATE_POOL,
+							Identifier.of("minecraft", "village/plains/town_centers"));
+					Optional<RegistryEntry.Reference<StructurePool>> poolOpt =
+							world.getRegistryManager().get(RegistryKeys.TEMPLATE_POOL).getEntry(poolKey);
+
+					if (poolOpt.isEmpty()) {
+						ResonantCaves.LOGGER.warn("[VillageCore] Template pool village/plains/town_centers not found");
+						return;
 					}
-					// Restore the core block if the structure generation overwrote it.
+
+					// "minecraft:bottom" is the "name" NBT field on the vertical-anchor jigsaw
+					// blocks inside the plains town-center structures (confirmed from plains_fountain_01.nbt).
+					Identifier startName = Identifier.of("minecraft", "bottom");
+					boolean ok = StructurePoolBasedGenerator.generate(
+							world, poolOpt.get(), startName, depth, pos, false);
+					if (!ok) {
+						ResonantCaves.LOGGER.warn("[VillageCore] StructurePoolBasedGenerator.generate returned false (depth {})", depth);
+					}
+
+					// Restore the core block if the structure generator overwrote it.
 					if (!world.getBlockState(pos).isOf(savedState.getBlock())) {
 						world.setBlockState(pos, savedState);
+					}
+
+					// Persist the new depth so reopening the GUI resumes from here.
+					if (world.getBlockEntity(pos) instanceof CreativeVillageCoreBlockEntity core) {
+						core.setDepth(depth);
 					}
 				}));
 
