@@ -106,6 +106,26 @@ public final class ModBlocks {
 
 	public static final Item CREATIVE_STATION_ITEM = registerBlockItem("creative_station", CREATIVE_STATION);
 
+	// Village Core — crafted block that builds a village from scratch using the vanilla jigsaw pool.
+	// Powered by RF; once per midnight it charges upkeep, pays emeralds, and grows by one piece.
+	public static final Block VILLAGE_CORE = register("village_core",
+			new VillageCoreBlock(AbstractBlock.Settings.create()
+					.mapColor(MapColor.PALE_GREEN)
+					.strength(50.0F, 1200.0F)
+					.sounds(BlockSoundGroup.METAL)
+					.requiresTool()));
+
+	public static final Item VILLAGE_CORE_ITEM = registerBlockItem("village_core", VILLAGE_CORE);
+
+	// Creative Village Core — debug counterpart: no RF requirement, has a "Simulate Day" button.
+	public static final Block CREATIVE_VILLAGE_CORE = register("creative_village_core",
+			new CreativeVillageCoreBlock(AbstractBlock.Settings.create()
+					.mapColor(MapColor.PINK)
+					.strength(3.5F, 6.0F)
+					.sounds(BlockSoundGroup.METAL)));
+
+	public static final Item CREATIVE_VILLAGE_CORE_ITEM = registerBlockItem("creative_village_core", CREATIVE_VILLAGE_CORE);
+
 	private static Block register(String name, Block block) {
 		return Registry.register(Registries.BLOCK, Identifier.of(ResonantCaves.MOD_ID, name), block);
 	}
@@ -130,6 +150,8 @@ public final class ModBlocks {
 			entries.add(GOLD_STATION_ITEM);
 			entries.add(ENERGY_MONITOR_ITEM);
 			entries.add(CREATIVE_STATION_ITEM);
+			entries.add(VILLAGE_CORE_ITEM);
+			entries.add(CREATIVE_VILLAGE_CORE_ITEM);
 		});
 	}
 }

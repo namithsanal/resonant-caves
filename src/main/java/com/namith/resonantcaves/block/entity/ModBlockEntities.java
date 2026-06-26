@@ -4,6 +4,7 @@ import com.namith.resonantcaves.ResonantCaves;
 import com.namith.resonantcaves.block.CableBlock;
 import com.namith.resonantcaves.block.ModBlocks;
 import com.namith.resonantcaves.block.StationBlock;
+import com.namith.resonantcaves.block.VillageCoreBlock;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -44,6 +45,14 @@ public final class ModBlockEntities {
 			Registries.BLOCK_ENTITY_TYPE,
 			Identifier.of(ResonantCaves.MOD_ID, "creative_station"),
 			BlockEntityType.Builder.create(CreativeStationBlockEntity::new, ModBlocks.CREATIVE_STATION).build(null));
+
+	// Village Core — shared type for both survival and creative variants (creative mode is derived
+	// from the block type at runtime, not stored in the block entity type).
+	public static final BlockEntityType<VillageCoreBlockEntity> VILLAGE_CORE = Registry.register(
+			Registries.BLOCK_ENTITY_TYPE,
+			Identifier.of(ResonantCaves.MOD_ID, "village_core"),
+			BlockEntityType.Builder.create(VillageCoreBlockEntity::new,
+					ModBlocks.VILLAGE_CORE, ModBlocks.CREATIVE_VILLAGE_CORE).build(null));
 
 	public static void register() {
 		CableNetworkTicker.register();

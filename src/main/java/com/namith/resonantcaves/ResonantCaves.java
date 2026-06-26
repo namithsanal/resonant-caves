@@ -5,6 +5,7 @@ import com.namith.resonantcaves.block.entity.ModBlockEntities;
 import com.namith.resonantcaves.item.ModItems;
 import com.namith.resonantcaves.network.ModNetworking;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.transfer.v1.item.ItemStorage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -43,6 +44,15 @@ public class ResonantCaves implements ModInitializer {
 		EnergyStorage.SIDED.registerForBlockEntity(
 				(blockEntity, direction) -> blockEntity.getEnergyStorage(),
 				ModBlockEntities.CREATIVE_STATION);
+
+		// Village Core — crafted energy-powered village builder. Insert-only RF storage for upkeep;
+		// emerald drawer (Storage Drawers-style) for output, with Transfer API for hoppers/pipes.
+		EnergyStorage.SIDED.registerForBlockEntity(
+				(blockEntity, direction) -> blockEntity.coreEnergyStorage,
+				ModBlockEntities.VILLAGE_CORE);
+		ItemStorage.SIDED.registerForBlockEntity(
+				(blockEntity, direction) -> blockEntity.emeraldStorage,
+				ModBlockEntities.VILLAGE_CORE);
 
 		// Monitor/station GUIs — no ScreenHandler/inventory, just payloads telling the client which
 		// screen to open plus small periodic data pushes while it stays open.

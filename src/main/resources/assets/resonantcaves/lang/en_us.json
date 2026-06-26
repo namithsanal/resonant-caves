@@ -13,5 +13,7 @@
   "item.resonantcaves.resonant_wand": "Resonant Wand",
   "item.resonantcaves.resonant_wand.no_power": "No power source in range",
   "generator.resonantcaves.resonant_world": "Resonant World",
-  "generator.minecraft.normal": "Vanilla World"
+  "generator.minecraft.normal": "Vanilla World",
+  "block.resonantcaves.village_core": "Village Core",
+  "block.resonantcaves.creative_village_core": "Creative Village Core"
 }

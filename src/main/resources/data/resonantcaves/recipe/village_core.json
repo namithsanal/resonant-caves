@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "EBE",
+    "BNB",
+    "EBE"
+  ],
+  "key": {
+    "E": {"item": "minecraft:emerald_block"},
+    "B": {"item": "minecraft:iron_block"},
+    "N": {"item": "minecraft:nether_star"}
+  },
+  "result": {
+    "id": "resonantcaves:village_core",
+    "count": 1
+  }
+}

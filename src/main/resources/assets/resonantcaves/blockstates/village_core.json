@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "resonantcaves:block/village_core" },
+    "facing=south": { "model": "resonantcaves:block/village_core", "y": 180 },
+    "facing=west":  { "model": "resonantcaves:block/village_core", "y": 270 },
+    "facing=east":  { "model": "resonantcaves:block/village_core", "y": 90 }
+  }
+}

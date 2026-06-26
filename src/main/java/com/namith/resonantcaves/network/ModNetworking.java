@@ -4,14 +4,19 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
+import com.namith.resonantcaves.block.CreativeVillageCoreBlock;
 import com.namith.resonantcaves.block.entity.EnergyScreenSource;
 import com.namith.resonantcaves.block.entity.MonitorBlockEntity;
+import com.namith.resonantcaves.block.entity.VillageCoreBlockEntity;
 import com.namith.resonantcaves.network.payload.CloseScreenPayload;
 import com.namith.resonantcaves.network.payload.MonitorHistoryUpdatePayload;
 import com.namith.resonantcaves.network.payload.OpenMonitorScreenPayload;
 import com.namith.resonantcaves.network.payload.OpenStationScreenPayload;
+import com.namith.resonantcaves.network.payload.OpenVillageCoreScreenPayload;
 import com.namith.resonantcaves.network.payload.SetStationOutputPayload;
+import com.namith.resonantcaves.network.payload.SimulateDayPayload;
 import com.namith.resonantcaves.network.payload.StationStateUpdatePayload;
+import com.namith.resonantcaves.network.payload.VillageCoreStateUpdatePayload;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
@@ -43,8 +48,11 @@ public final class ModNetworking {
 		PayloadTypeRegistry.playS2C().register(MonitorHistoryUpdatePayload.ID, MonitorHistoryUpdatePayload.CODEC);
 		PayloadTypeRegistry.playS2C().register(OpenStationScreenPayload.ID, OpenStationScreenPayload.CODEC);
 		PayloadTypeRegistry.playS2C().register(StationStateUpdatePayload.ID, StationStateUpdatePayload.CODEC);
+		PayloadTypeRegistry.playS2C().register(OpenVillageCoreScreenPayload.ID, OpenVillageCoreScreenPayload.CODEC);
+		PayloadTypeRegistry.playS2C().register(VillageCoreStateUpdatePayload.ID, VillageCoreStateUpdatePayload.CODEC);
 		PayloadTypeRegistry.playC2S().register(SetStationOutputPayload.ID, SetStationOutputPayload.CODEC);
 		PayloadTypeRegistry.playC2S().register(CloseScreenPayload.ID, CloseScreenPayload.CODEC);
+		PayloadTypeRegistry.playC2S().register(SimulateDayPayload.ID, SimulateDayPayload.CODEC);
 
 		ServerPlayNetworking.registerGlobalReceiver(SetStationOutputPayload.ID, (payload, context) ->
 				context.server().execute(() -> {
@@ -60,6 +68,15 @@ public final class ModNetworking {
 					LAST_STORED_ENERGY.remove(uuid);
 				}));
 
+		ServerPlayNetworking.registerGlobalReceiver(SimulateDayPayload.ID, (payload, context) ->
+				context.server().execute(() -> {
+					if (!(context.player().getWorld() instanceof net.minecraft.server.world.ServerWorld sw)) return;
+					if (sw.getBlockEntity(payload.pos()) instanceof VillageCoreBlockEntity core
+							&& sw.getBlockState(payload.pos()).getBlock() instanceof CreativeVillageCoreBlock) {
+						core.processMidnight(sw, true);
+					}
+				}));
+
 		ServerPlayConnectionEvents.DISCONNECT.register((handler, server) -> {
 			UUID uuid = handler.getPlayer().getUuid();
 			OPEN_SCREENS.remove(uuid);
@@ -68,9 +85,18 @@ public final class ModNetworking {
 		ServerTickEvents.END_SERVER_TICK.register(ModNetworking::pushOpenScreenUpdates);
 	}
 
-	/** Called when a player's client opens a monitor/station screen, so periodic updates start flowing. */
+	/** Called when a player's client opens a monitor/station/village-core screen, so periodic updates start flowing. */
 	public static void trackOpenScreen(ServerPlayerEntity player, BlockPos pos) {
 		OPEN_SCREENS.put(player.getUuid(), pos);
+	}
+
+	/** Push a Village Core state update to all players who currently have that core's screen open. */
+	public static void pushVillageCoreUpdate(MinecraftServer server, BlockPos pos, VillageCoreStateUpdatePayload payload) {
+		for (ServerPlayerEntity player : server.getPlayerManager().getPlayerList()) {
+			if (pos.equals(OPEN_SCREENS.get(player.getUuid()))) {
+				ServerPlayNetworking.send(player, payload);
+			}
+		}
 	}
 
 	private static void pushOpenScreenUpdates(MinecraftServer server) {
@@ -95,6 +121,9 @@ public final class ModNetworking {
 			if (blockEntity instanceof MonitorBlockEntity monitor) {
 				ServerPlayNetworking.send(player, new MonitorHistoryUpdatePayload(
 						pos, monitor.getLatestSample(), monitor.getLatestFlowDirection()));
+			} else if (blockEntity instanceof VillageCoreBlockEntity core) {
+				ServerPlayNetworking.send(player, new VillageCoreStateUpdatePayload(
+						pos, core.citizenUUIDs.size(), core.houseCount, core.storedEmeralds));
 			} else if (blockEntity instanceof EnergyScreenSource source) {
 				long current = source.getStoredEnergyForDisplay();
 				long previous = LAST_STORED_ENERGY.getOrDefault(player.getUuid(), current);

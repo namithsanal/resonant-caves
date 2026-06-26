@@ -1,6 +1,8 @@
 package com.namith.resonantcaves;
 
+import com.namith.resonantcaves.block.CreativeVillageCoreBlock;
 import com.namith.resonantcaves.block.ModBlocks;
+import com.namith.resonantcaves.block.VillageCoreBlock;
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -31,7 +33,10 @@ public final class UnbreakableBlocks {
 	 */
 	public static boolean isUnbreakable(BlockState state) {
 		return state.isOf(Blocks.STONE) || state.isOf(Blocks.DEEPSLATE)
-				|| state.isOf(ModBlocks.RESONANT_ORE) || state.isOf(ModBlocks.DEEPSLATE_RESONANT_ORE);
+				|| state.isOf(ModBlocks.RESONANT_ORE) || state.isOf(ModBlocks.DEEPSLATE_RESONANT_ORE)
+				// Village Core is unbreakable once placed in survival; Creative Village Core stays breakable
+				// so creative admins can still remove it.
+				|| (state.getBlock() instanceof VillageCoreBlock && !(state.getBlock() instanceof CreativeVillageCoreBlock));
 	}
 
 	public static void register() {

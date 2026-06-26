@@ -3,11 +3,14 @@ package com.namith.resonantcaves;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.namith.resonantcaves.client.gui.MonitorScreen;
 import com.namith.resonantcaves.client.gui.StationScreen;
+import com.namith.resonantcaves.client.gui.VillageCoreScreen;
 import com.namith.resonantcaves.item.ModItems;
 import com.namith.resonantcaves.network.payload.MonitorHistoryUpdatePayload;
 import com.namith.resonantcaves.network.payload.OpenMonitorScreenPayload;
 import com.namith.resonantcaves.network.payload.OpenStationScreenPayload;
+import com.namith.resonantcaves.network.payload.OpenVillageCoreScreenPayload;
 import com.namith.resonantcaves.network.payload.StationStateUpdatePayload;
+import com.namith.resonantcaves.network.payload.VillageCoreStateUpdatePayload;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderContext;
@@ -79,6 +82,21 @@ public class ResonantCavesClient implements ClientModInitializer {
 				context.client().execute(() -> {
 					if (context.client().currentScreen instanceof StationScreen screen && screen.getPos().equals(payload.pos())) {
 						screen.updateStoredEnergy(payload.storedEnergy(), payload.ratePerTick());
+					}
+				}));
+
+		ClientPlayNetworking.registerGlobalReceiver(OpenVillageCoreScreenPayload.ID, (payload, context) ->
+				context.client().execute(() -> context.client().setScreen(new VillageCoreScreen(
+						payload.pos(), payload.villagerCount(), payload.houseCount(), payload.piecesPlaced(),
+						payload.lifetimePillagers(), payload.deathCount(), payload.peakPopulation(),
+						payload.daysActive(), payload.storedEmeralds(), payload.populationHistory(),
+						payload.creative()))));
+
+		ClientPlayNetworking.registerGlobalReceiver(VillageCoreStateUpdatePayload.ID, (payload, context) ->
+				context.client().execute(() -> {
+					if (context.client().currentScreen instanceof VillageCoreScreen screen
+							&& screen.getPos().equals(payload.pos())) {
+						screen.updateLiveData(payload.villagerCount(), payload.houseCount(), payload.storedEmeralds());
 					}
 				}));
 	}

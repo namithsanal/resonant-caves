@@ -43,4 +43,20 @@ final class PayloadCodecs {
 				}
 				return result;
 			});
+
+	static final PacketCodec<ByteBuf, int[]> INT_ARRAY = PacketCodec.of(
+			(int[] value, ByteBuf buf) -> {
+				buf.writeInt(value.length);
+				for (int sample : value) {
+					buf.writeInt(sample);
+				}
+			},
+			(ByteBuf buf) -> {
+				int length = buf.readInt();
+				int[] result = new int[length];
+				for (int i = 0; i < length; i++) {
+					result[i] = buf.readInt();
+				}
+				return result;
+			});
 }
