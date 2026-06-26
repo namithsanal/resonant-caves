@@ -106,6 +106,15 @@ public final class ModBlocks {
 
 	public static final Item CREATIVE_STATION_ITEM = registerBlockItem("creative_station", CREATIVE_STATION);
 
+	// Creative Village Core — debug/creative-only; places a plains village on demand.
+	public static final Block CREATIVE_VILLAGE_CORE = register("creative_village_core",
+			new CreativeVillageCoreBlock(AbstractBlock.Settings.create()
+					.mapColor(MapColor.EMERALD_GREEN)
+					.strength(3.5F, 6.0F)
+					.sounds(BlockSoundGroup.STONE)));
+
+	public static final Item CREATIVE_VILLAGE_CORE_ITEM = registerBlockItem("creative_village_core", CREATIVE_VILLAGE_CORE);
+
 	private static Block register(String name, Block block) {
 		return Registry.register(Registries.BLOCK, Identifier.of(ResonantCaves.MOD_ID, name), block);
 	}
@@ -130,6 +139,7 @@ public final class ModBlocks {
 			entries.add(GOLD_STATION_ITEM);
 			entries.add(ENERGY_MONITOR_ITEM);
 			entries.add(CREATIVE_STATION_ITEM);
+			entries.add(CREATIVE_VILLAGE_CORE_ITEM);
 		});
 	}
 }

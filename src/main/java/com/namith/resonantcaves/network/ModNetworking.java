@@ -4,22 +4,28 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.namith.resonantcaves.block.entity.EnergyScreenSource;
 import com.namith.resonantcaves.block.entity.MonitorBlockEntity;
 import com.namith.resonantcaves.network.payload.CloseScreenPayload;
+import com.namith.resonantcaves.network.payload.GenerateVillagePayload;
 import com.namith.resonantcaves.network.payload.MonitorHistoryUpdatePayload;
 import com.namith.resonantcaves.network.payload.OpenMonitorScreenPayload;
 import com.namith.resonantcaves.network.payload.OpenStationScreenPayload;
+import com.namith.resonantcaves.network.payload.OpenVillageCoreScreenPayload;
 import com.namith.resonantcaves.network.payload.SetStationOutputPayload;
 import com.namith.resonantcaves.network.payload.StationStateUpdatePayload;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 
 /**
  * Registers this mod's GUI payloads (no {@code ScreenHandler}/inventory is used anywhere — these
@@ -43,13 +49,37 @@ public final class ModNetworking {
 		PayloadTypeRegistry.playS2C().register(MonitorHistoryUpdatePayload.ID, MonitorHistoryUpdatePayload.CODEC);
 		PayloadTypeRegistry.playS2C().register(OpenStationScreenPayload.ID, OpenStationScreenPayload.CODEC);
 		PayloadTypeRegistry.playS2C().register(StationStateUpdatePayload.ID, StationStateUpdatePayload.CODEC);
+		PayloadTypeRegistry.playS2C().register(OpenVillageCoreScreenPayload.ID, OpenVillageCoreScreenPayload.CODEC);
 		PayloadTypeRegistry.playC2S().register(SetStationOutputPayload.ID, SetStationOutputPayload.CODEC);
 		PayloadTypeRegistry.playC2S().register(CloseScreenPayload.ID, CloseScreenPayload.CODEC);
+		PayloadTypeRegistry.playC2S().register(GenerateVillagePayload.ID, GenerateVillagePayload.CODEC);
 
 		ServerPlayNetworking.registerGlobalReceiver(SetStationOutputPayload.ID, (payload, context) ->
 				context.server().execute(() -> {
 					if (context.player().getWorld().getBlockEntity(payload.pos()) instanceof EnergyScreenSource source) {
 						source.setTargetOutput(payload.newTargetOutput());
+					}
+				}));
+
+		ServerPlayNetworking.registerGlobalReceiver(GenerateVillagePayload.ID, (payload, context) ->
+				context.server().execute(() -> {
+					ServerWorld world = context.player().getServerWorld();
+					BlockPos pos = payload.pos();
+					// Save state so the core block can be restored if the village overwrites it.
+					BlockState savedState = world.getBlockState(pos);
+					try {
+						world.getServer().getCommandManager().getDispatcher().execute(
+								"place structure minecraft:village_plains "
+										+ pos.getX() + " " + pos.getY() + " " + pos.getZ(),
+								world.getServer().getCommandSource()
+										.withWorld(world)
+										.withPosition(Vec3d.ofCenter(pos)));
+					} catch (CommandSyntaxException e) {
+						// Village placement failed (wrong dimension, biome check, etc.) — leave world unchanged.
+					}
+					// Restore the core block if the structure generation overwrote it.
+					if (!world.getBlockState(pos).isOf(savedState.getBlock())) {
+						world.setBlockState(pos, savedState);
 					}
 				}));
 

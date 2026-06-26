@@ -12,6 +12,7 @@ A Fabric mod for Minecraft **1.21.1** that overhauls survival around one core id
 6. **Creeper packs** — Creepers spawn in packs of 5-10.
 7. **Resonant Helmet** — A gold-tier helmet that grants permanent, dimmed Night Vision and a through-walls radar showing every hostile mob within 128 blocks as a faintly breathing orb. Not craftable: zombies have a small chance to spawn wearing one, and always drop it when killed.
 8. **Resonant Wand** — A hitscan ranged weapon fueled by nearby Station energy. Right-click fires instantly at whatever you're looking at (up to 64 blocks), drawing RF from the nearest visible Station within 32 blocks. Damage scales with distance (triangular roll, 2–12). Skeletons sometimes spawn holding one instead of a bow and always drop it on death; right-clicking a Snow Golem with the wand equips it, giving the golem its own station-powered ranged attack.
+9. **Village generation** *(in development)* — A **Creative Village Core** block (creative-only, not craftable) acts as the seed point for programmatic village placement. Right-click it to open a GUI; pressing "Generate" places a plains village centred on the block's position. The block is preserved after generation. This is the first step of a broader village-generation system.
 
 ## Requirements
 
